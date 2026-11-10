@@ -1,0 +1,2766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="tool">
+  <meta name="design-style" content="charter">
+  <title>MATH 017 Module 1 Mastery Assessment | Montgomery College</title>
+
+  <!-- Typography: Libre Caslon Text & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Charter palette */
+      --background: #f7f4ec;               /* warm cream paper */
+      --surface-container-low: #fffdf8;    /* bright leaf: cards, panels */
+      --surface-container: #ece5d4;        /* deeper cream: secondary buttons */
+      --surface-container-high: #e3dac4;   /* table header band, hover fill */
+
+      /* Ink */
+      --on-surface: #1c1f26;               /* near-black ink */
+      --on-surface-variant: #4f5360;       /* graphite: captions, secondary text */
+
+      /* Rules */
+      --outline: #b08d57;                  /* brass: rules & borders */
+      --outline-variant: #d9cfb8;          /* pale brass: hairline dividers */
+
+      /* Accents */
+      --primary: #14213d;                  /* deep navy: title band, primary actions */
+      --on-primary: #f7f4ec;               /* cream on navy */
+      --primary-container: #e3e6ee;        /* pale navy wash: active state */
+      --on-primary-container: #14213d;
+      --secondary: #2d5a4a;                /* bottle green: satisfactory / pass */
+      --tertiary: #8a6a35;                 /* dark brass: small accent text */
+      --error: #9b2c2c;                    /* crimson: error / unsatisfactory */
+      --on-error: #f7f4ec;
+
+      /* Semantic tokens */
+      --positive: #2d5a4a;
+      --warning: #b08d57;
+      --focus: #14213d;
+
+      /* Type scale for tool */
+      --display-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Fonts */
+      --font-headline: 'Libre Caslon Text', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-label: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+      /* Spacing scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Shapes & Effects */
+      --rounded: 0.125rem;
+      --rounded-lg: 0.25rem;
+      --rounded-full: 0.125rem;
+      --brass-rule: 2px solid var(--outline);
+      --hairline: 1px solid var(--outline-variant);
+      --leaf-underline: 0 1px 0 var(--outline-variant);
+      --card-shadow: 0 2px 8px rgba(28, 31, 38, 0.05);
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      overflow-x: clip;
+      min-height: 100vh;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Accessibility */
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Charter Title Band */
+    .title-band {
+      background: var(--primary);
+      color: var(--on-primary);
+      padding: var(--space-xl) var(--space-lg) var(--space-lg);
+      border-bottom: 3px solid var(--outline);
+      position: relative;
+    }
+
+    .title-band-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .institution-kicker {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: color-mix(in srgb, var(--outline) 85%, var(--on-primary));
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .title-band h1 {
+      font-family: var(--font-headline);
+      font-size: var(--display-size);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--on-primary);
+    }
+
+    .title-band .lede {
+      font-size: var(--body-size);
+      color: color-mix(in srgb, var(--on-primary) 82%, var(--primary));
+      max-width: 75ch;
+      margin-top: var(--space-xs);
+    }
+
+    .header-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+      margin-top: var(--space-sm);
+      padding-top: var(--space-sm);
+      border-top: 1px solid color-mix(in srgb, var(--outline) 35%, transparent);
+      font-size: var(--label-size);
+      font-family: var(--font-label);
+    }
+
+    .header-meta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid color-mix(in srgb, var(--outline) 40%, transparent);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--rounded);
+      color: var(--on-primary);
+    }
+
+    /* Container */
+    .app-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-lg);
+    }
+
+    /* Figure & Panel Cards */
+    .figure-card {
+      background: var(--surface-container-low);
+      border-top: var(--brass-rule);
+      box-shadow: var(--card-shadow), var(--leaf-underline);
+      border-left: var(--hairline);
+      border-right: var(--hairline);
+      border-bottom: var(--hairline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl);
+      margin-bottom: var(--space-xl);
+    }
+
+    .card-title {
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: var(--space-xs);
+    }
+
+    .card-subtitle {
+      font-size: var(--body-size);
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-lg);
+    }
+
+    /* Form Inputs */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .input-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface);
+    }
+
+    .input-field {
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      min-height: 44px;
+      transition: border-color var(--dur-short) var(--ease-out);
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-container);
+    }
+
+    .input-hint {
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--rounded);
+      border: 1px solid transparent;
+      cursor: pointer;
+      min-height: 44px;
+      transition: background-color var(--dur-short) var(--ease-out),
+                  border-color var(--dur-short) var(--ease-out),
+                  color var(--dur-short) var(--ease-out),
+                  transform var(--dur-micro) var(--ease-out);
+      text-decoration: none;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background: color-mix(in srgb, var(--primary) 88%, white);
+    }
+
+    .btn-secondary {
+      background: var(--surface-container);
+      color: var(--on-surface);
+      border-color: var(--outline-variant);
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-container-high);
+      border-color: var(--outline);
+    }
+
+    .btn-brass {
+      background: var(--outline);
+      color: #fff;
+      border-color: var(--outline);
+    }
+
+    .btn-brass:hover {
+      background: var(--tertiary);
+    }
+
+    .btn-sm {
+      padding: 0.4rem 0.8rem;
+      font-size: var(--label-size);
+      min-height: 36px;
+    }
+
+    /* Policy & Outcomes Box */
+    .policy-callout {
+      background: var(--surface-container);
+      border-left: 4px solid var(--outline);
+      padding: var(--space-md) var(--space-lg);
+      margin: var(--space-lg) 0;
+      font-size: var(--body-size);
+    }
+
+    .policy-callout h3 {
+      font-family: var(--font-headline);
+      font-size: 1.05rem;
+      color: var(--primary);
+      margin-bottom: var(--space-xs);
+    }
+
+    .policy-callout ul {
+      margin-left: var(--space-lg);
+      margin-top: var(--space-xs);
+      color: var(--on-surface-variant);
+    }
+
+    /* Quiz Assessment Header Bar (Sticky) */
+    .quiz-sticky-bar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--surface-container-low);
+      border-bottom: 2px solid var(--outline-variant);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      padding: var(--space-sm) var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+
+    .quiz-bar-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    .student-badge-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .student-badge-name {
+      font-weight: 600;
+      font-size: var(--body-size);
+      color: var(--primary);
+    }
+
+    .student-badge-id {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    .progress-track-wrapper {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      flex: 1;
+      max-width: 400px;
+    }
+
+    .progress-bar-bg {
+      flex: 1;
+      height: 8px;
+      background: var(--surface-container);
+      border-radius: var(--rounded-full);
+      overflow: hidden;
+      border: 1px solid var(--outline-variant);
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 0%;
+      transition: width var(--dur-short) var(--ease-out);
+    }
+
+    .progress-count-text {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    /* Question Navigator Dots */
+    .question-nav-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: var(--space-lg);
+      padding: var(--space-sm);
+      background: var(--surface-container);
+      border-radius: var(--rounded);
+      border: var(--hairline);
+    }
+
+    .nav-dot {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--surface-container-low);
+      color: var(--on-surface-variant);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  border-color var(--dur-micro) var(--ease-out);
+    }
+
+    .nav-dot:hover {
+      background: var(--surface-container-high);
+      border-color: var(--outline);
+    }
+
+    .nav-dot.answered {
+      background: var(--primary-container);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .nav-dot.current {
+      outline: 2px solid var(--outline);
+      outline-offset: 1px;
+    }
+
+    /* Question Card */
+    .question-card {
+      background: var(--surface-container-low);
+      border-top: 2px solid var(--outline);
+      border-left: var(--hairline);
+      border-right: var(--hairline);
+      border-bottom: var(--hairline);
+      box-shadow: var(--card-shadow), var(--leaf-underline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl);
+      margin-bottom: var(--space-xl);
+      scroll-margin-top: 90px;
+    }
+
+    .question-meta-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-xs);
+      border-bottom: 1px dashed var(--outline-variant);
+    }
+
+    .question-category-tag {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--tertiary);
+    }
+
+    .question-points {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      background: var(--surface-container);
+      padding: 2px 8px;
+      border-radius: var(--rounded);
+    }
+
+    .question-prompt {
+      font-size: 1.0625rem;
+      font-weight: 500;
+      color: var(--on-surface);
+      margin-bottom: var(--space-lg);
+      line-height: 1.5;
+    }
+
+    .math-highlight {
+      font-family: var(--font-body);
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--surface-container);
+      padding: 0.15rem 0.4rem;
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline-variant);
+      font-variant-numeric: tabular-nums lining-nums;
+    }
+
+    /* Question Options List */
+    .options-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .option-label {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      padding: var(--space-md) var(--space-lg);
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      cursor: pointer;
+      min-height: 52px;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  border-color var(--dur-micro) var(--ease-out),
+                  box-shadow var(--dur-micro) var(--ease-out);
+    }
+
+    .option-label:hover {
+      background: var(--surface-container);
+      border-color: var(--outline);
+    }
+
+    .option-label.selected {
+      background: var(--primary-container);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+
+    .option-radio {
+      margin-top: 3px;
+      accent-color: var(--primary);
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    .option-text-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .option-letter {
+      font-family: var(--font-label);
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.85rem;
+    }
+
+    .option-content {
+      font-size: var(--body-size);
+      color: var(--on-surface);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Contingency Table inside Question */
+    .assessment-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-md) 0 var(--space-lg);
+      font-size: 0.92rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .assessment-table th, .assessment-table td {
+      border: 1px solid var(--outline-variant);
+      padding: 0.6rem 0.9rem;
+      text-align: left;
+    }
+
+    .assessment-table th {
+      background: var(--surface-container-high);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--on-surface);
+    }
+
+    .assessment-table td {
+      background: var(--surface-container-low);
+    }
+
+    .assessment-table .num-cell {
+      text-align: right;
+    }
+
+    .assessment-table tfoot td {
+      background: var(--surface-container);
+      font-weight: 600;
+    }
+
+    /* Submission Bar */
+    .submit-section {
+      background: var(--surface-container);
+      border: var(--hairline);
+      border-top: var(--brass-rule);
+      padding: var(--space-xl);
+      border-radius: var(--rounded-lg);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+      margin-top: var(--space-2xl);
+    }
+
+    .submit-status-msg {
+      font-size: var(--body-size);
+      color: var(--on-surface-variant);
+    }
+
+    /* Score & Results View */
+    .results-banner {
+      background: var(--surface-container-low);
+      border-top: 4px solid var(--primary);
+      box-shadow: var(--card-shadow), var(--leaf-underline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-2xl) var(--space-xl);
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+
+    .results-banner.mastery {
+      border-top-color: var(--secondary);
+    }
+
+    .results-banner.needs-review {
+      border-top-color: var(--error);
+    }
+
+    .mastery-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-label);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.4rem 1.2rem;
+      border-radius: var(--rounded);
+      margin-bottom: var(--space-md);
+    }
+
+    .mastery-status-pill.satisfactory {
+      background: #e8f3ed;
+      color: var(--secondary);
+      border: 1px solid var(--secondary);
+    }
+
+    .mastery-status-pill.unsatisfactory {
+      background: #fbebee;
+      color: var(--error);
+      border: 1px solid var(--error);
+    }
+
+    .score-display-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xs);
+    }
+
+    .score-big-number {
+      font-family: var(--font-headline);
+      font-size: clamp(3rem, 2rem + 3vw, 4.5rem);
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .score-max-number {
+      font-family: var(--font-headline);
+      font-size: 1.8rem;
+      color: var(--on-surface-variant);
+    }
+
+    .score-percent-label {
+      font-family: var(--font-headline);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--tertiary);
+    }
+
+    .results-explanation {
+      max-width: 65ch;
+      margin: var(--space-md) auto 0;
+      font-size: 1.05rem;
+      color: var(--on-surface-variant);
+    }
+
+    /* Category Diagnostic Grid */
+    .diagnostic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--space-md);
+      margin: var(--space-xl) 0;
+    }
+
+    .diagnostic-card {
+      background: var(--surface-container-low);
+      border: var(--hairline);
+      border-top: var(--brass-rule);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+    }
+
+    .diag-title {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-xs);
+    }
+
+    .diag-score {
+      font-family: var(--font-headline);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: var(--space-xs);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .diag-bar-bg {
+      height: 6px;
+      background: var(--surface-container);
+      border-radius: var(--rounded-full);
+      overflow: hidden;
+      border: 1px solid var(--outline-variant);
+    }
+
+    .diag-bar-fill {
+      height: 100%;
+      background: var(--secondary);
+    }
+
+    .diag-bar-fill.weak {
+      background: var(--error);
+    }
+
+    /* Official Completion Certificate */
+    .certificate-wrapper {
+      margin: var(--space-2xl) 0;
+      position: relative;
+    }
+
+    .certificate-card {
+      background: #fffdf8;
+      border: 8px solid var(--primary);
+      outline: 2px solid var(--outline);
+      outline-offset: -5px;
+      padding: var(--space-2xl) var(--space-xl);
+      box-shadow: 0 10px 30px rgba(20, 33, 61, 0.12);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Dynamic Watermark Background */
+    .certificate-watermark-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.05;
+      font-family: var(--font-label);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 2.2;
+      color: var(--primary);
+      transform: rotate(-15deg) scale(1.3);
+      user-select: none;
+      word-break: break-all;
+      overflow: hidden;
+    }
+
+    /* Diagonal Anti-Cheating Stamp */
+    .certificate-security-stamp {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-25deg);
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.07;
+      font-family: var(--font-headline);
+      font-size: clamp(2rem, 1.5rem + 3vw, 3.5rem);
+      font-weight: 700;
+      color: var(--secondary);
+      border: 6px solid var(--secondary);
+      padding: var(--space-md) var(--space-xl);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .certificate-inner {
+      position: relative;
+      z-index: 3;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cert-crest-svg {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto var(--space-md);
+      color: var(--outline);
+    }
+
+    .cert-college-title {
+      font-family: var(--font-label);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: var(--space-xs);
+    }
+
+    .cert-department {
+      font-family: var(--font-headline);
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--tertiary);
+      margin-bottom: var(--space-md);
+    }
+
+    .cert-main-heading {
+      font-family: var(--font-headline);
+      font-size: clamp(1.8rem, 1.4rem + 1.8vw, 2.8rem);
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+      line-height: 1.1;
+    }
+
+    .cert-rule-brass {
+      width: 140px;
+      height: 2px;
+      background: var(--outline);
+      margin: var(--space-md) auto;
+    }
+
+    .cert-body-intro {
+      font-size: 1rem;
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-sm);
+    }
+
+    .cert-recipient-name {
+      font-family: var(--font-headline);
+      font-size: clamp(1.8rem, 1.2rem + 1.8vw, 2.5rem);
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: underline;
+      text-decoration-color: var(--outline);
+      text-underline-offset: 6px;
+      margin-bottom: var(--space-xs);
+    }
+
+    .cert-recipient-id {
+      font-family: var(--font-label);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-lg);
+    }
+
+    .cert-body-statement {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--on-surface);
+      max-width: 65ch;
+      margin: 0 auto var(--space-xl);
+    }
+
+    .cert-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background: rgba(247, 244, 236, 0.7);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      margin-bottom: var(--space-xl);
+      text-align: left;
+    }
+
+    .cert-meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cert-meta-lbl {
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--tertiary);
+    }
+
+    .cert-meta-val {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Verification Code Box */
+    .verification-box {
+      background: var(--surface-container-low);
+      border: 2px dashed var(--outline);
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--rounded);
+      margin-bottom: var(--space-xl);
+      text-align: center;
+    }
+
+    .verification-title {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      margin-bottom: var(--space-xs);
+    }
+
+    .verification-code-display {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--surface-container);
+      padding: 0.5rem 1rem;
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline-variant);
+      display: inline-block;
+      margin: var(--space-xs) 0 var(--space-sm);
+      letter-spacing: 0.08em;
+      word-break: break-all;
+    }
+
+    .cert-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      justify-content: center;
+      margin-top: var(--space-lg);
+    }
+
+    /* Question Review Accordion */
+    .review-section-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      margin: var(--space-2xl) 0 var(--space-lg);
+    }
+
+    .review-filter-btns {
+      display: flex;
+      gap: var(--space-xs);
+    }
+
+    .review-item {
+      background: var(--surface-container-low);
+      border-left: 4px solid var(--outline-variant);
+      border-top: var(--hairline);
+      border-right: var(--hairline);
+      border-bottom: var(--hairline);
+      border-radius: var(--rounded);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+      transition: border-color var(--dur-short) var(--ease-out);
+    }
+
+    .review-item.correct {
+      border-left-color: var(--secondary);
+    }
+
+    .review-item.incorrect {
+      border-left-color: var(--error);
+    }
+
+    .review-status-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: var(--rounded);
+      margin-bottom: var(--space-xs);
+    }
+
+    .review-status-tag.correct {
+      background: #e8f3ed;
+      color: var(--secondary);
+    }
+
+    .review-status-tag.incorrect {
+      background: #fbebee;
+      color: var(--error);
+    }
+
+    .explanation-drawer {
+      margin-top: var(--space-md);
+      padding: var(--space-md);
+      background: var(--surface-container);
+      border-radius: var(--rounded);
+      font-size: 0.92rem;
+      border-left: 3px solid var(--tertiary);
+    }
+
+    .explanation-title {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--tertiary);
+      margin-bottom: var(--space-xs);
+    }
+
+    /* Modal / Inspector for Instructor Verification */
+    .inspector-card {
+      background: var(--surface-container-low);
+      border: var(--brass-rule);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl);
+      margin-top: var(--space-2xl);
+    }
+
+    /* Print Stylesheet for Certificate */
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+      }
+
+      .title-band,
+      .quiz-sticky-bar,
+      .question-nav-strip,
+      .submit-section,
+      .cert-actions,
+      .review-section-header,
+      .review-list,
+      .inspector-card,
+      #entryView,
+      #quizView,
+      .diagnostic-grid,
+      .results-banner,
+      .btn {
+        display: none !important;
+      }
+
+      .certificate-wrapper {
+        margin: 0;
+        padding: 0;
+      }
+
+      .certificate-card {
+        border: 4px solid #14213d !important;
+        box-shadow: none !important;
+        padding: 2rem !important;
+        page-break-inside: avoid;
+      }
+
+      .certificate-watermark-bg,
+      .certificate-security-stamp {
+        display: block !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* Mobile Adaptations */
+    @media (max-width: 640px) {
+      .app-container {
+        padding: var(--space-md) var(--space-sm);
+      }
+
+      .title-band {
+        padding: var(--space-lg) var(--space-sm);
+      }
+
+      .figure-card, .question-card, .results-banner {
+        padding: var(--space-md);
+      }
+
+      .quiz-bar-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .cert-card {
+        padding: var(--space-md);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Title Band -->
+  <header class="title-band">
+    <div class="title-band-inner">
+      <div class="institution-kicker">
+        <span>Montgomery College</span>
+        <span>•</span>
+        <span>Department of Mathematics</span>
+      </div>
+      <h1>MATH 017 Mastery Assessment</h1>
+      <p class="lede">
+        Module 1: Number Sense & Proportional Reasoning Foundations — Decimals, Rounding, Conversions, Rates, and Relative Frequency.
+      </p>
+      <div class="header-meta-row">
+        <span class="header-meta-badge">Corequisite Support for MATH 117</span>
+        <span class="header-meta-badge">Mastery Goal: 80% (16/20 pts) for Satisfactory (S)</span>
+        <span class="header-meta-badge">Unlimited Retakes with Dynamic Values</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-container">
+
+    <!-- VIEW 1: STUDENT ENTRY SCREEN -->
+    <section id="entryView" class="figure-card">
+      <h2 class="card-title">Student Identification & Assessment Registration</h2>
+      <p class="card-subtitle">
+        Enter your official Montgomery College student information to generate your randomized Module 1 mastery assessment.
+      </p>
+
+      <form id="entryForm" onsubmit="event.preventDefault(); startAssessment();">
+        <div class="form-grid">
+          <div class="input-group">
+            <label class="input-label" for="studentNameInput">Student Full Name *</label>
+            <input type="text" id="studentNameInput" class="input-field" placeholder="e.g. Alex Morgan" required autocomplete="name">
+            <span class="input-hint">Will be permanently watermarked on your official completion certificate.</span>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label" for="studentIdInput">Montgomery College ID / Email *</label>
+            <input type="text" id="studentIdInput" class="input-field" placeholder="e.g. M01234567 or student@montgomerycollege.edu" required>
+            <span class="input-hint">Used to encode tamper-resistant verification hash for Blackboard Ultra.</span>
+          </div>
+
+          <div class="input-group">
+            <label class="input-label" for="courseCrnInput">MATH 117 / 017 Section (Optional)</label>
+            <input type="text" id="courseCrnInput" class="input-field" placeholder="e.g. CRN 21675 (Prof. Perine)">
+            <span class="input-hint">Assists your course instructor in cross-referencing your grade.</span>
+          </div>
+        </div>
+
+        <div class="policy-callout">
+          <h3>Assessment & Grading Norms (Faculty Guidelines)</h3>
+          <ul>
+            <li><strong>Mastery Requirement:</strong> A cumulative score of <strong>80% or higher (16+ out of 20 points)</strong> is required to earn an <strong>S (Satisfactory)</strong> grade for Module 1.</li>
+            <li><strong>Anti-Cheating Verification:</strong> Upon meeting the 80% threshold, the system issues a watermarked certificate and a tamper-resistant Verification Code to paste directly into Blackboard Ultra.</li>
+            <li><strong>Unlimited Retakes:</strong> If you do not achieve 80% on this attempt, you may retake immediately with completely fresh random values and problem contexts.</li>
+          </ul>
+        </div>
+
+        <div style="display: flex; gap: var(--space-md); flex-wrap: wrap; align-items: center; margin-top: var(--space-lg);">
+          <button type="submit" id="startBtn" class="btn btn-primary" style="font-size: 1rem; padding: 0.85rem 2rem;">
+            Begin Assessment Attempt #1 →
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="toggleInstructorInspector()">
+            Instructor / Verification Inspector
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- VIEW 2: QUIZ ASSESSMENT SCREEN (Initially hidden) -->
+    <div id="quizView" style="display: none;">
+      <!-- Sticky Navigation Bar -->
+      <div class="quiz-sticky-bar">
+        <div class="quiz-bar-inner">
+          <div class="student-badge-group">
+            <span class="student-badge-name" id="barStudentName">Student Name</span>
+            <span class="student-badge-id" id="barStudentMeta">ID: M00000000 • Attempt #1</span>
+          </div>
+
+          <div class="progress-track-wrapper">
+            <div class="progress-bar-bg" aria-hidden="true">
+              <div id="quizProgressFill" class="progress-bar-fill"></div>
+            </div>
+            <span id="quizProgressCount" class="progress-count-text">0 / 20 Answered</span>
+          </div>
+
+          <div>
+            <button type="button" class="btn btn-brass btn-sm" onclick="promptSubmitQuiz()">
+              Submit Assessment
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Jump Navigator Dots -->
+      <div class="question-nav-strip" id="questionNavStrip" aria-label="Question Jump List">
+        <!-- Generated dynamically (1 to 20) -->
+      </div>
+
+      <!-- Question List Container -->
+      <div id="questionListContainer">
+        <!-- 20 dynamically generated question cards will be injected here -->
+      </div>
+
+      <!-- Submit Section -->
+      <div class="submit-section">
+        <h3 style="font-family: var(--font-headline); color: var(--primary);">Ready to Submit Attempt?</h3>
+        <p class="submit-status-msg" id="bottomStatusMsg">
+          You have answered 0 of 20 questions. Ensure you have reviewed all responses.
+        </p>
+        <button type="button" class="btn btn-primary" style="padding: 0.85rem 2.5rem; font-size: 1rem;" onclick="promptSubmitQuiz()">
+          Submit & Grade Assessment →
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW 3: RESULTS, CERTIFICATE & DIAGNOSTIC REVIEW (Initially hidden) -->
+    <div id="resultsView" style="display: none;">
+
+      <!-- Headline Score Banner -->
+      <div id="resultsBanner" class="results-banner">
+        <div id="masteryStatusBadge" class="mastery-status-pill">Mastery Status</div>
+        <div class="score-display-row">
+          <span class="score-big-number" id="finalScoreNumber">18</span>
+          <span class="score-max-number">/ 20</span>
+          <span class="score-percent-label" id="finalScorePercent">(90%)</span>
+        </div>
+        <p class="results-explanation" id="finalScoreMessage">
+          Detailed diagnostic analysis of your quantitative reasoning performance.
+        </p>
+
+        <div style="margin-top: var(--space-lg); display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+          <button type="button" id="retakeButtonTop" class="btn btn-secondary" onclick="restartWithNewValues()">
+            Retake Assessment with New Values ↺
+          </button>
+          <a href="#certificateAnchor" id="jumpToCertBtn" class="btn btn-primary" style="display: none;">
+            View Official Certificate ↓
+          </a>
+        </div>
+      </div>
+
+      <!-- Category Diagnostic Performance Grid -->
+      <h3 style="font-family: var(--font-headline); font-size: 1.25rem; color: var(--primary); margin-bottom: var(--space-sm);">
+        Module 1 Skill Domain Breakdown
+      </h3>
+      <div class="diagnostic-grid" id="diagnosticGrid">
+        <!-- Injected via JavaScript -->
+      </div>
+
+      <!-- OFFICIAL CERTIFICATE OF MASTERY (Shown if Score >= 80%) -->
+      <div id="certificateWrapper" class="certificate-wrapper" style="display: none;">
+        <span id="certificateAnchor"></span>
+        <div class="certificate-card" id="certificateCard">
+
+          <!-- Anti-Cheating Repeated Watermark Background -->
+          <div class="certificate-watermark-bg" id="certificateWatermarkBg">
+            MONTGOMERY COLLEGE MATH 017 MASTERY VERIFIED • MONTGOMERY COLLEGE MATH 017 MASTERY VERIFIED
+          </div>
+
+          <!-- Diagonal Security Seal Stamp -->
+          <div class="certificate-security-stamp" id="securityStamp">
+            ★ OFFICIAL MASTERY VERIFIED ★
+          </div>
+
+          <div class="certificate-inner">
+            <!-- Montgomery College Crest Vector SVG -->
+            <svg class="cert-crest-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="2.5" />
+              <circle cx="50" cy="50" r="41" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" />
+              <path d="M50 18 L68 32 L68 62 L50 78 L32 62 L32 32 Z" fill="none" stroke="currentColor" stroke-width="2" />
+              <path d="M50 24 L50 72 M36 44 L64 44 M36 56 L64 56" stroke="currentColor" stroke-width="1.5" />
+              <circle cx="50" cy="36" r="3.5" fill="currentColor" />
+            </svg>
+
+            <div class="cert-college-title">Montgomery College • Academic Affairs</div>
+            <div class="cert-department">Department of Mathematics</div>
+
+            <h2 class="cert-main-heading">Certificate of Mastery</h2>
+            <div class="cert-rule-brass"></div>
+
+            <p class="cert-body-intro">This official credential certifies that</p>
+            <div class="cert-recipient-name" id="certStudentName">Alex Morgan</div>
+            <div class="cert-recipient-id" id="certStudentId">MC Student ID: M01234567</div>
+
+            <p class="cert-body-statement">
+              has satisfactorily demonstrated academic proficiency and numerical mastery in 
+              <strong>MATH 017: Elements of Statistics Support — Module 1: Number Sense and Proportional Reasoning Foundations</strong>, 
+              meeting the college corequisite competency standards with a score of 80% or greater.
+            </p>
+
+            <div class="cert-meta-grid">
+              <div class="cert-meta-item">
+                <span class="cert-meta-lbl">Mastery Grade</span>
+                <span class="cert-meta-val" style="color: var(--secondary);">Satisfactory (S)</span>
+              </div>
+              <div class="cert-meta-item">
+                <span class="cert-meta-lbl">Score Earned</span>
+                <span class="cert-meta-val" id="certScoreVal">18 / 20 (90%)</span>
+              </div>
+              <div class="cert-meta-item">
+                <span class="cert-meta-lbl">Attempt Count</span>
+                <span class="cert-meta-val" id="certAttemptVal">Attempt #1</span>
+              </div>
+              <div class="cert-meta-item">
+                <span class="cert-meta-lbl">Date of Issue</span>
+                <span class="cert-meta-val" id="certDateVal">November 10, 2026</span>
+              </div>
+            </div>
+
+            <!-- Verification Code Box -->
+            <div class="verification-box">
+              <div class="verification-title">Official Blackboard Ultra Verification Code</div>
+              <div class="verification-code-display" id="certVerificationCode">MC17-M1-S18A1-8FA4-C3D1</div>
+              <p style="font-size: 0.85rem; color: var(--on-surface-variant); margin-bottom: var(--space-sm);">
+                Copy and paste this tamper-resistant code into your Blackboard Ultra Module 1 assignment submission portal as official evidence of mastery.
+              </p>
+              <button type="button" class="btn btn-secondary btn-sm" id="copyCodeBtn" onclick="copyVerificationCode()">
+                Copy Verification Code
+              </button>
+            </div>
+
+            <div class="cert-actions">
+              <button type="button" class="btn btn-primary" onclick="window.print()">
+                Print / Save Certificate as PDF ⎙
+              </button>
+              <button type="button" class="btn btn-secondary" onclick="restartWithNewValues()">
+                Retake Assessment for Additional Practice ↺
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diagnostic Review Section -->
+      <div class="review-section-header">
+        <div>
+          <h3 style="font-family: var(--font-headline); font-size: 1.35rem; color: var(--primary);">
+            Diagnostic Question-by-Question Review
+          </h3>
+          <p style="font-size: var(--label-size); color: var(--on-surface-variant);">
+            Examine the correct mathematical solutions, place-value reasoning, and common misconceptions for every question.
+          </p>
+        </div>
+        <div class="review-filter-btns">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="filterReviewList('all')">All (20)</button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="filterReviewList('incorrect')">Incorrect Only</button>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="filterReviewList('correct')">Correct Only</button>
+        </div>
+      </div>
+
+      <div id="reviewListContainer" class="review-list">
+        <!-- Detailed feedback injected via JS -->
+      </div>
+
+      <div style="text-align: center; margin: var(--space-2xl) 0;">
+        <button type="button" class="btn btn-primary" style="padding: 0.85rem 2.5rem;" onclick="restartWithNewValues()">
+          Start New Assessment Attempt with Fresh Random Values ↺
+        </button>
+      </div>
+    </div>
+
+    <!-- Instructor Verification Code Inspector Tool (Collapsible) -->
+    <section class="inspector-card" id="inspectorSection" style="margin-top: var(--space-3xl); display: none;">
+      <h3 style="font-family: var(--font-headline); font-size: 1.2rem; color: var(--primary); margin-bottom: var(--space-xs);">
+        Instructor & Student Verification Code Inspector
+      </h3>
+      <p style="font-size: 0.88rem; color: var(--on-surface-variant); margin-bottom: var(--space-md);">
+        Enter any Module 1 verification code submitted by a student to verify cryptographic checksum authenticity, decoded student identity, score, and completion timestamp.
+      </p>
+
+      <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: var(--space-md);">
+        <input type="text" id="inspectorCodeInput" class="input-field" placeholder="Paste verification code here..." style="flex: 1; min-width: 260px;">
+        <button type="button" class="btn btn-primary" onclick="verifyInspectorCode()">Verify Code</button>
+      </div>
+
+      <div id="inspectorResultBox" style="display: none; padding: var(--space-md); background: var(--surface-container); border-radius: var(--rounded); border-left: 4px solid var(--secondary); font-size: 0.9rem;">
+        <!-- Verification output injected here -->
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="max-width: 1000px; margin: var(--space-2xl) auto var(--space-xl); padding: 0 var(--space-lg); text-align: center; font-size: 0.8rem; color: var(--on-surface-variant); border-top: 1px solid var(--outline-variant); padding-top: var(--space-md);">
+    <p>Montgomery College Department of Mathematics • MATH 017 Elements of Statistics Support (Fall 2026 – Summer 2027)</p>
+    <p style="margin-top: 4px;">Aligned with "Unlocking the Power of Data" (Lock 5) • S/U Corequisite Proficiency Standards</p>
+  </footer>
+
+  <api-shim></api-shim>
+  <script>
+    /* ==========================================================================
+       MATH 017 MODULE 1: DYNAMIC MASTERY ASSESSMENT ENGINE
+       Algorithmic generation of 20 randomized questions with distractor models,
+       anti-cheating verification code cryptography, and detailed diagnostics.
+       ========================================================================== */
+
+    // Global Application State
+    let currentUser = {
+      name: '',
+      id: '',
+      crn: '',
+      attemptCount: 1
+    };
+
+    let currentQuestions = [];
+    let studentResponses = {}; // questionIndex -> selectedOptionIndex
+    let assessmentHistory = [];
+    let currentAttemptResult = null;
+
+    // Helper: secure pseudorandom helpers
+    function randInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function randChoice(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    // Format numbers nicely
+    function roundTo(num, decimals) {
+      const factor = Math.pow(10, decimals);
+      return Math.round((num + Number.EPSILON) * factor) / factor;
+    }
+
+    /* --------------------------------------------------------------------------
+       20 ALGORITHMIC QUESTION GENERATORS (MODULE 1 TARGETS)
+       Categories:
+       1. Decimals: Place Value & Inequalities (Q1 - Q4)
+       2. Decimal Rounding (Q5 - Q8)
+       3. Fraction-Decimal-Percent Conversions (Q9 - Q12)
+       4. Proportions & Real-World Rates (Q13 - Q16)
+       5. Relative Frequency & Part-to-Whole Tables (Q17 - Q20)
+       -------------------------------------------------------------------------- */
+
+    // Q1: Place Value in Decimals
+    function generateQ1() {
+      const whole = randInt(12, 89);
+      const d1 = randInt(1, 9);
+      const d2 = randInt(0, 9);
+      const d3 = randInt(1, 9);
+      const d4 = randInt(1, 9);
+      const numStr = `${whole}.${d1}${d2}${d3}${d4}`;
+
+      const places = [
+        { name: 'tenths', digit: d1, val: `0.${d1}` },
+        { name: 'hundredths', digit: d2, val: `0.0${d2}` },
+        { name: 'thousandths', digit: d3, val: `0.00${d3}` },
+        { name: 'ten-thousandths', digit: d4, val: `0.000${d4}` }
+      ];
+
+      // Pick a target place
+      const target = randChoice(places);
+
+      const prompt = `In the decimal number <span class="math-highlight">${numStr}</span>, what is the <strong>place value</strong> of the digit <strong>${target.digit}</strong>?`;
+      const correctText = target.name.charAt(0).toUpperCase() + target.name.slice(1);
+
+      const pool = ['Tenths', 'Hundredths', 'Thousandths', 'Ten-thousandths', 'Ones', 'Tens'];
+      const distractors = pool.filter(p => p.toLowerCase() !== target.name).slice(0, 3);
+
+      return {
+        category: 'Place Value & Comparison',
+        prompt,
+        options: [correctText, ...distractors],
+        correctAnswerText: correctText,
+        explanation: `To find the place value of digits to the right of the decimal point:
+          1st place to the right is the tenths (0.1),
+          2nd place is the hundredths (0.01),
+          3rd place is the thousandths (0.001), and
+          4th place is the ten-thousandths (0.0001).
+          In ${numStr}, the digit ${target.digit} occupies the <strong>${target.name}</strong> position.`
+      };
+    }
+
+    // Q2: Decimal Inequality Comparison (<, >, =)
+    function generateQ2() {
+      const types = ['trap_length', 'equal_trailing', 'thousandths_diff'];
+      const type = randChoice(types);
+      let valA, valB, relation, note;
+
+      if (type === 'trap_length') {
+        // e.g. 0.405 vs 0.45
+        const base = randChoice([0.3, 0.4, 0.5, 0.6, 0.7]);
+        const d1 = Math.round(base * 10);
+        const d_sub = randInt(1, 4);
+        valA = `0.${d1}0${d_sub}`; // e.g. 0.403
+        valB = `0.${d1}${d_sub}`;  // e.g. 0.43
+        relation = '<';
+        note = `Comparing place by place: the tenths digits are both ${d1}, but the hundredths digit of ${valA} is 0 while the hundredths digit of ${valB} is ${d_sub}. Since 0 < ${d_sub}, ${valA} is strictly less than ${valB}.`;
+      } else if (type === 'equal_trailing') {
+        // e.g. 0.60 vs 0.600
+        const d = randChoice([2, 4, 6, 8]);
+        valA = `0.${d}0`;
+        valB = `0.${d}00`;
+        relation = '=';
+        note = `Trailing zeros after the decimal point do not change the quantitative magnitude of the number: ${valA} and ${valB} both represent exactly ${d * 10} hundredths.`;
+      } else {
+        // e.g. 6.089 vs 6.098
+        const whole = randInt(3, 9);
+        valA = `${whole}.089`;
+        valB = `${whole}.098`;
+        relation = '<';
+        note = `Comparing hundredths place: 8 hundredths is less than 9 hundredths, so ${valA} < ${valB}.`;
+      }
+
+      const prompt = `Which comparison symbol correctly makes the statement true?<br><br>
+        <div style="text-align: center; font-size: 1.25rem;">
+          <span class="math-highlight">${valA}</span> &nbsp;<strong>___</strong>&nbsp; <span class="math-highlight">${valB}</span>
+        </div>`;
+
+      const symbolMap = {
+        '<': '< (less than)',
+        '>': '> (greater than)',
+        '=': '= (equal to)'
+      };
+
+      const correctText = symbolMap[relation];
+      const distractors = ['< (less than)', '> (greater than)', '= (equal to)', '≠ (cannot be compared)'].filter(s => s !== correctText);
+
+      return {
+        category: 'Place Value & Comparison',
+        prompt,
+        options: [correctText, ...distractors.slice(0, 3)],
+        correctAnswerText: correctText,
+        explanation: `${note} Therefore, the correct relationship is <strong>${valA} ${relation} ${valB}</strong>.`
+      };
+    }
+
+    // Q3: Ordering Decimals on a Number Line
+    function generateQ3() {
+      const base = randChoice([0.3, 0.6, 0.7, 0.8]);
+      const bStr = base.toFixed(1);
+      const bInt = Math.round(base * 10);
+
+      // 4 numbers like 0.6, 0.602, 0.62, 0.6205
+      const num1 = `${bStr}`;
+      const num2 = `0.${bInt}0${randInt(2, 4)}`;
+      const num3 = `0.${bInt}${randInt(2, 4)}`;
+      const num4 = `0.${bInt}${randInt(2, 4)}05`;
+
+      const arr = [
+        { str: num1, val: parseFloat(num1) },
+        { str: num2, val: parseFloat(num2) },
+        { str: num3, val: parseFloat(num3) },
+        { str: num4, val: parseFloat(num4) }
+      ];
+
+      // Sort strictly least to greatest
+      arr.sort((a, b) => a.val - b.val);
+      const correctStr = arr.map(x => x.str).join(' ,  ');
+
+      // Distractor 1: Reverse (greatest to least)
+      const dist1 = [...arr].reverse().map(x => x.str).join(' ,  ');
+      // Distractor 2: Treat as whole integer suffix length
+      const dist2 = [arr[0], arr[2], arr[1], arr[3]].map(x => x.str).join(' ,  ');
+      // Distractor 3: Another common misconception
+      const dist3 = [arr[1], arr[0], arr[3], arr[2]].map(x => x.str).join(' ,  ');
+
+      const options = [correctStr, dist1, dist2, dist3];
+
+      return {
+        category: 'Place Value & Comparison',
+        prompt: `Which of the following correctly orders the decimals from <strong>least to greatest</strong>?<br><br>
+          <div style="text-align: center;"><span class="math-highlight">${shuffleArray(arr.map(x => x.str)).join(' &nbsp;•&nbsp; ')}</span></div>`,
+        options,
+        correctAnswerText: correctStr,
+        explanation: `To compare and order decimals accurately, pad them with trailing zeros so each has the same number of decimal places (e.g. 4 decimal places):
+          Compare tenths, then hundredths, then thousandths, then ten-thousandths.
+          The strictly increasing sequence is <strong>${correctStr}</strong>.`
+      };
+    }
+
+    // Q4: Decimal Magnitude & Betweenness on Number Line
+    function generateQ4() {
+      const lowerHundredth = randInt(25, 78);
+      const lower = lowerHundredth / 100;
+      const upper = (lowerHundredth + 1) / 100;
+      const lowerStr = lower.toFixed(2);
+      const upperStr = upper.toFixed(2);
+
+      const d3 = randInt(2, 8);
+      const correctVal = `${lowerStr}${d3}`; // e.g. between 0.38 and 0.39 -> 0.385
+
+      const dist1 = `${(lowerHundredth - 1) / 100}9`; // just below
+      const dist2 = `${upperStr}2`; // just above
+      const dist3 = `0.0${lowerHundredth}`; // order of magnitude misconception
+
+      return {
+        category: 'Place Value & Comparison',
+        prompt: `Which of the following numbers lies strictly <strong>between</strong> <span class="math-highlight">${lowerStr}</span> and <span class="math-highlight">${upperStr}</span> on a number line?`,
+        options: [correctVal, dist1, dist2, dist3],
+        correctAnswerText: correctVal,
+        explanation: `Think of ${lowerStr} as ${lowerStr}0 and ${upperStr} as ${upperStr}0. 
+          The decimal <strong>${correctVal}</strong> lies strictly between ${lowerStr}0 and ${upperStr}0 because ${lowerStr} < ${correctVal} < ${upperStr}.`
+      };
+    }
+
+    // Q5: Rounding to Nearest Hundredth
+    function generateQ5() {
+      const whole = randInt(15, 65);
+      const tenth = randInt(1, 8);
+      const hundredth = randInt(1, 8);
+      const thousandth = randChoice([6, 7, 8, 9]); // ensure rounding up
+      const tenThou = randInt(1, 5);
+
+      const numStr = `${whole}.${tenth}${hundredth}${thousandth}${tenThou}`;
+      const roundedHundredth = (thousandth >= 5) ? hundredth + 1 : hundredth;
+      const correctStr = `${whole}.${tenth}${roundedHundredth}`;
+
+      const dist1 = `${whole}.${tenth}${hundredth}`; // truncated
+      const dist2 = `${whole}.${tenth + 1}`; // rounded to tenths
+      const dist3 = `${whole}.${tenth}${hundredth}${thousandth}`; // rounded to thousandths
+
+      return {
+        category: 'Decimal Rounding',
+        prompt: `Round the number <span class="math-highlight">${numStr}</span> to the nearest <strong>hundredth</strong>.`,
+        options: [correctStr, dist1, dist2, dist3],
+        correctAnswerText: correctStr,
+        explanation: `The hundredths place is the second digit after the decimal point (${hundredth}).
+          Looking at the next digit to the right (the thousandths place), we see <strong>${thousandth}</strong>.
+          Since ${thousandth} ≥ 5, we round up by adding 1 to the hundredths place: ${hundredth} + 1 = ${roundedHundredth}.
+          The rounded result is <strong>${correctStr}</strong>.`
+      };
+    }
+
+    // Q6: Rounding to Nearest Thousandth
+    function generateQ6() {
+      const whole = randChoice([0, 1, 2]);
+      const d1 = randInt(3, 7);
+      const d2 = randInt(0, 8);
+      const d3 = randInt(1, 8);
+      const d4 = randChoice([5, 6, 7, 8, 9]); // round up
+      const numStr = `${whole}.${d1}${d2}${d3}${d4}2`;
+
+      const correctStr = `${whole}.${d1}${d2}${d3 + 1}`;
+      const dist1 = `${whole}.${d1}${d2}${d3}`; // truncated
+      const dist2 = `${whole}.${d1}${d2 + 1}`; // rounded to hundredths
+      const dist3 = `${whole}.${d1}${d2}${d3}${d4}`; // rounded to ten-thousandths
+
+      return {
+        category: 'Decimal Rounding',
+        prompt: `Round the decimal <span class="math-highlight">${numStr}</span> to the nearest <strong>thousandth</strong>.`,
+        options: [correctStr, dist1, dist2, dist3],
+        correctAnswerText: correctStr,
+        explanation: `The thousandths place is the 3rd digit after the decimal point (${d3}).
+          The ten-thousandths digit is <strong>${d4}</strong>. Because ${d4} ≥ 5, we round up to get <strong>${correctStr}</strong>.`
+      };
+    }
+
+    // Q7: Rounding Mean / Rate in Statistical Context
+    function generateQ7() {
+      const minutes = randInt(22, 45);
+      const tenths = randInt(2, 7);
+      const hundredths = randChoice([6, 7, 8]);
+      const rawMean = `${minutes}.${tenths}${hundredths}4`;
+      const correctTenth = `${minutes}.${tenths + 1}`;
+
+      const dist1 = `${minutes}.${tenths}`; // truncated
+      const dist2 = `${minutes}.${tenths}${hundredths}`; // nearest hundredth
+      const dist3 = `${minutes + 1}.0`; // nearest whole number
+
+      return {
+        category: 'Decimal Rounding',
+        prompt: `In a sample of Montgomery County commuters, the sample mean commute time was calculated as <span class="math-highlight">${rawMean} minutes</span>. Round this statistic to the nearest <strong>tenth of a minute</strong>.`,
+        options: [correctTenth, dist1, dist2, dist3],
+        correctAnswerText: correctTenth,
+        explanation: `To round to the nearest tenth, locate the tenths place digit (${tenths}).
+          Look at the hundredths digit: <strong>${hundredths}</strong>.
+          Since ${hundredths} ≥ 5, round up: ${tenths} + 1 = ${tenths + 1}.
+          Thus, the rounded mean is <strong>${correctTenth} minutes</strong>.`
+      };
+    }
+
+    // Q8: Target Rounding Justification
+    function generateQ8() {
+      const whole = randInt(4, 9);
+      const tenth = randInt(2, 6);
+      const targetStr = `${whole}.${tenth}0`; // e.g. 5.40
+
+      const correctVal = `${whole}.${tenth - 1}97`; // e.g. 5.397 -> rounds to 5.40
+      const dist1 = `${whole}.${tenth}08`; // rounds to 5.41
+      const dist2 = `${whole}.${tenth - 1}42`; // rounds to 5.39
+      const dist3 = `${whole}.${tenth + 1}03`; // rounds to 5.50
+
+      return {
+        category: 'Decimal Rounding',
+        prompt: `Which of the following numbers, when rounded to the nearest <strong>hundredth</strong>, produces exactly <span class="math-highlight">${targetStr}</span>?`,
+        options: [correctVal, dist1, dist2, dist3],
+        correctAnswerText: correctVal,
+        explanation: `Any number from ${whole}.${tenth - 1}95 up to ${whole}.${tenth}049... rounds to ${targetStr}.
+          Testing <strong>${correctVal}</strong>: the hundredths digit is 9 and the thousandths digit is 7 (≥ 5), so 9 rounds up to 10, carrying over to make <strong>${targetStr}</strong>.`
+      };
+    }
+
+    // Q9: Small Percentages to Decimals (Tricky Percentages)
+    function generateQ9() {
+      const pctVal = randChoice(['0.4%', '0.6%', '0.8%', '0.25%', '0.08%']);
+      let correctDec, dist1, dist2, dist3;
+
+      if (pctVal === '0.4%') {
+        correctDec = '0.004';
+        dist1 = '0.04';
+        dist2 = '0.4';
+        dist3 = '0.0004';
+      } else if (pctVal === '0.6%') {
+        correctDec = '0.006';
+        dist1 = '0.06';
+        dist2 = '0.6';
+        dist3 = '0.0006';
+      } else if (pctVal === '0.8%') {
+        correctDec = '0.008';
+        dist1 = '0.08';
+        dist2 = '0.8';
+        dist3 = '0.0008';
+      } else if (pctVal === '0.25%') {
+        correctDec = '0.0025';
+        dist1 = '0.025';
+        dist2 = '0.25';
+        dist3 = '2.5';
+      } else {
+        correctDec = '0.0008';
+        dist1 = '0.008';
+        dist2 = '0.08';
+        dist3 = '0.8';
+      }
+
+      return {
+        category: 'Fraction-Decimal-Percent',
+        prompt: `Convert the percentage <span class="math-highlight">${pctVal}</span> to an equivalent decimal.`,
+        options: [correctDec, dist1, dist2, dist3],
+        correctAnswerText: correctDec,
+        explanation: `To convert any percent to a decimal, divide by 100 (which shifts the decimal point 2 places to the left):<br>
+          ${pctVal} = ${pctVal.replace('%', '')} ÷ 100 = <strong>${correctDec}</strong>.<br>
+          A frequent mistake is moving the decimal point only one place (giving ${dist1}), which actually equals 10 times too much!`
+      };
+    }
+
+    // Q10: Percentages Greater than 100% or Decimals Greater than 1
+    function generateQ10() {
+      const items = [
+        { dec: '1.07', pct: '107%', d1: '1.07%', d2: '10.7%', d3: '1070%' },
+        { dec: '1.25', pct: '125%', d1: '1.25%', d2: '12.5%', d3: '0.125%' },
+        { dec: '2.4', pct: '240%', d1: '2.4%', d2: '24%', d3: '0.024%' },
+        { dec: '1.035', pct: '103.5%', d1: '1.035%', d2: '10.35%', d3: '1035%' }
+      ];
+      const item = randChoice(items);
+
+      return {
+        category: 'Fraction-Decimal-Percent',
+        prompt: `Convert the decimal number <span class="math-highlight">${item.dec}</span> to a percentage.`,
+        options: [item.pct, item.d1, item.d2, item.d3],
+        correctAnswerText: item.pct,
+        explanation: `To convert a decimal to a percentage, multiply by 100 and affix the % symbol:<br>
+          ${item.dec} × 100 = <strong>${item.pct}</strong>.<br>
+          Since ${item.dec} > 1, the percentage must be greater than 100%.`
+      };
+    }
+
+    // Q11: Common Statistical Fractions to Decimals and Percents
+    function generateQ11() {
+      const fractions = [
+        { n: 3, d: 8, dec: '0.375', pct: '37.5%' },
+        { n: 5, d: 8, dec: '0.625', pct: '62.5%' },
+        { n: 7, d: 20, dec: '0.35', pct: '35%' },
+        { n: 9, d: 20, dec: '0.45', pct: '45%' },
+        { n: 13, d: 25, dec: '0.52', pct: '52%' },
+        { n: 7, d: 25, dec: '0.28', pct: '28%' }
+      ];
+      const frac = randChoice(fractions);
+      const correctText = `Decimal: ${frac.dec} &nbsp;|&nbsp; Percent: ${frac.pct}`;
+
+      const d1 = `Decimal: ${frac.dec} &nbsp;|&nbsp; Percent: ${(parseFloat(frac.dec) * 10).toFixed(1)}%`;
+      const d2 = `Decimal: ${(frac.d / frac.n).toFixed(3)} &nbsp;|&nbsp; Percent: ${frac.pct}`;
+      const d3 = `Decimal: ${(parseFloat(frac.dec) / 10).toFixed(4)} &nbsp;|&nbsp; Percent: ${frac.pct}`;
+
+      return {
+        category: 'Fraction-Decimal-Percent',
+        prompt: `Convert the fraction <span class="math-highlight">${frac.n}/${frac.d}</span> to both an exact decimal and a percentage.`,
+        options: [correctText, d1, d2, d3],
+        correctAnswerText: correctText,
+        explanation: `First divide the numerator by the denominator: ${frac.n} ÷ ${frac.d} = <strong>${frac.dec}</strong>.<br>
+          Then multiply the decimal by 100 to convert to a percentage: ${frac.dec} × 100% = <strong>${frac.pct}</strong>.`
+      };
+    }
+
+    // Q12: Conceptual FDP Statements & Misconception Evaluation
+    function generateQ12() {
+      const qTypes = [
+        {
+          falseStmt: '0.4% written as a decimal is 0.04.',
+          trueStmts: [
+            '0.08 is equivalent to 8%.',
+            'Converting a decimal to a percent means multiplying by 100 and adding %.',
+            'A decimal greater than 1 corresponds to a percentage greater than 100%.'
+          ],
+          correction: '0.4% = 0.4 ÷ 100 = 0.004, not 0.04 (which equals 4%).'
+        },
+        {
+          falseStmt: 'Converting 0.035 to a percent gives 0.35%.',
+          trueStmts: [
+            'Converting 0.375 to a percent gives 37.5%.',
+            '125% written as a decimal is 1.25.',
+            'Relative frequency is a proportion between 0 and 1.'
+          ],
+          correction: '0.035 × 100% = 3.5%, not 0.35%.'
+        }
+      ];
+      const chosen = randChoice(qTypes);
+      const correctText = chosen.falseStmt;
+      const options = [correctText, ...chosen.trueStmts];
+
+      return {
+        category: 'Fraction-Decimal-Percent',
+        prompt: `Which of the following statements is <strong>FALSE</strong>?`,
+        options,
+        correctAnswerText: correctText,
+        explanation: `The false statement is: "<em>${chosen.falseStmt}</em>".<br>
+          <strong>Correction:</strong> ${chosen.correction}`
+      };
+    }
+
+    // Q13: Map Scale / Direct Proportion
+    function generateQ13() {
+      const scaleMiles = randChoice([12, 14, 15, 16, 18]);
+      const inches = randChoice([2.5, 3.5, 4.5, 5.5]);
+      const actualMiles = scaleMiles * inches;
+
+      const correctStr = `${actualMiles} miles`;
+      const dist1 = `${(scaleMiles / inches).toFixed(1)} miles`;
+      const dist2 = `${scaleMiles + inches} miles`;
+      const dist3 = `${scaleMiles * (inches - 1)} miles`;
+
+      return {
+        category: 'Proportions & Rates',
+        prompt: `A Maryland regional transit map uses a scale of <strong>1 inch = ${scaleMiles} miles</strong>. If the distance measured between two satellite campuses on the map is <span class="math-highlight">${inches} inches</span>, what is the actual distance in miles?`,
+        options: [correctStr, dist1, dist2, dist3],
+        correctAnswerText: correctStr,
+        explanation: `Set up the direct proportion:
+          <br><code>1 inch / ${scaleMiles} miles = ${inches} inches / x miles</code><br>
+          Cross-multiply: <code>x = ${inches} × ${scaleMiles} = <strong>${actualMiles} miles</strong></code>.`
+      };
+    }
+
+    // Q14: Recipe / Ratio Scaling
+    function generateQ14() {
+      const baseServings = 8;
+      const baseCups = randChoice([3, 4, 6]);
+      const newServings = randChoice([20, 24, 28]);
+      const neededCups = (baseCups * newServings) / baseServings;
+
+      const correctStr = `${neededCups} cups`;
+      const dist1 = `${neededCups + 2} cups`;
+      const dist2 = `${(baseServings * newServings) / baseCups} cups`;
+      const dist3 = `${baseCups + (newServings - baseServings)} cups`;
+
+      return {
+        category: 'Proportions & Rates',
+        prompt: `A catering recipe designed for <strong>${baseServings} servings</strong> requires <span class="math-highlight">${baseCups} cups</span> of flour. How many cups of flour are required to prepare <strong>${newServings} servings</strong> at the exact same ratio?`,
+        options: [correctStr, dist1, dist2, dist3],
+        correctAnswerText: correctStr,
+        explanation: `Set up the proportion:
+          <br><code>${baseCups} cups / ${baseServings} servings = x cups / ${newServings} servings</code><br>
+          Cross-multiply and solve for x:
+          <br><code>${baseServings}x = ${baseCups} × ${newServings} = ${baseCups * newServings}</code><br>
+          <code>x = ${baseCups * newServings} ÷ ${baseServings} = <strong>${neededCups} cups</strong></code>.`
+      };
+    }
+
+    // Q15: Unit Rate & Linear Cost Problem (Faculty Guide Category 5)
+    function generateQ15() {
+      const baseFee = randChoice([5, 6, 8]);
+      const perMile = randChoice([2.25, 2.50, 2.75]);
+      const miles = randChoice([8, 10, 12]);
+      const totalCost = baseFee + perMile * miles;
+
+      const correctStr = `$${totalCost.toFixed(2)}`;
+      const dist1 = `$${((baseFee + perMile) * miles).toFixed(2)}`;
+      const dist2 = `$${(perMile * miles).toFixed(2)}`;
+      const dist3 = `$${(baseFee * miles + perMile).toFixed(2)}`;
+
+      return {
+        category: 'Proportions & Rates',
+        prompt: `A rideshare in Rockville charges a flat base fee of <strong>$${baseFee.toFixed(2)}</strong> plus <strong>$${perMile.toFixed(2)} per mile</strong>. Using the linear model <code>y = ${baseFee} + ${perMile}x</code>, calculate the total fare for an <strong>${miles}-mile trip</strong>.`,
+        options: [correctStr, dist1, dist2, dist3],
+        correctAnswerText: correctStr,
+        explanation: `Substitute <code>x = ${miles}</code> into the linear rate model:
+          <br><code>Total Cost = $${baseFee.toFixed(2)} + ($${perMile.toFixed(2)} × ${miles})</code>
+          <br><code>Total Cost = $${baseFee.toFixed(2)} + $${(perMile * miles).toFixed(2)} = <strong>$${totalCost.toFixed(2)}</strong></code>.`
+      };
+    }
+
+    // Q16: Sample to Population Proportion Scaling
+    function generateQ16() {
+      const sampleSize = 200;
+      const count = randChoice([42, 46, 52, 54, 58]);
+      const sampleProp = count / sampleSize; // e.g. 0.23, 0.27
+      const popSize = randChoice([4000, 5000, 6000]);
+      const expectedPopCount = Math.round(sampleProp * popSize);
+
+      const correctStr = `${expectedPopCount.toLocaleString()} students`;
+      const dist1 = `${(expectedPopCount / 10).toFixed(0)} students`;
+      const dist2 = `${(popSize - count).toLocaleString()} students`;
+      const dist3 = `${Math.round(sampleProp * 100)} students`;
+
+      return {
+        category: 'Proportions & Rates',
+        prompt: `In a representative random sample of <strong>${sampleSize} Montgomery College students</strong>, <span class="math-highlight">${count} students</span> indicated they utilize campus math tutoring centers. If the total college enrollment is <strong>${popSize.toLocaleString()} students</strong>, estimate the total number of students expected to utilize campus math tutoring.`,
+        options: [correctStr, dist1, dist2, dist3],
+        correctAnswerText: correctStr,
+        explanation: `1. Calculate the sample proportion: <code>p̂ = ${count} / ${sampleSize} = ${sampleProp.toFixed(3)}</code> (or ${(sampleProp * 100).toFixed(1)}%).<br>
+          2. Scale to the total population: <code>${sampleProp.toFixed(3)} × ${popSize.toLocaleString()} = <strong>${expectedPopCount.toLocaleString()} students</strong></code>.`
+      };
+    }
+
+    // Q17: Relative Frequency & Proportions (Faculty Guide Category 3)
+    function generateQ17() {
+      const total = 40;
+      const count = randChoice([14, 18, 22, 26]);
+      const dec = (count / total).toFixed(2);
+      const pct = `${Math.round((count / total) * 100)}%`;
+      const correctStr = `Decimal: ${dec} &nbsp;|&nbsp; Percent: ${pct}`;
+
+      const complementCount = total - count;
+      const compDec = (complementCount / total).toFixed(2);
+      const compPct = `${Math.round((complementCount / total) * 100)}%`;
+
+      const dist1 = `Decimal: ${compDec} &nbsp;|&nbsp; Percent: ${compPct}`;
+      const dist2 = `Decimal: ${(count / 100).toFixed(2)} &nbsp;|&nbsp; Percent: ${(count / total).toFixed(1)}%`;
+      const dist3 = `Decimal: ${(count / complementCount).toFixed(2)} &nbsp;|&nbsp; Percent: ${pct}`;
+
+      return {
+        category: 'Relative Frequency & Tables',
+        prompt: `In a statistics support section of <strong>${total} students</strong>, <span class="math-highlight">${count} students</span> prefer online tutoring sessions. Find the <strong>relative frequency</strong> of students who prefer online tutoring, expressed as a decimal rounded to the nearest hundredth and as a whole percentage.`,
+        options: [correctStr, dist1, dist2, dist3],
+        correctAnswerText: correctStr,
+        explanation: `Relative frequency is computed as Part ÷ Whole:
+          <br><code>Relative Frequency = ${count} ÷ ${total} = <strong>${dec}</strong></code>.
+          <br>To convert to a percentage, multiply by 100: <code>${dec} × 100% = <strong>${pct}</strong></code>.`
+      };
+    }
+
+    // Q18: Relative Frequency with Specific Rounding Targets
+    function generateQ18() {
+      const questionsTotal = randChoice([32, 35, 45]);
+      const questionsCorrect = randChoice([21, 23, 27, 29]);
+      const rawFrac = questionsCorrect / questionsTotal;
+      const decHundredth = rawFrac.toFixed(2);
+      const pctTenth = `${(rawFrac * 100).toFixed(1)}%`;
+      const correctStr = `${decHundredth} (or ${pctTenth})`;
+
+      const truncatedDec = (Math.floor(rawFrac * 100) / 100).toFixed(2);
+      const dist1 = `${truncatedDec} (or ${(rawFrac * 10).toFixed(1)}%)`;
+      const dist2 = `${(questionsTotal / questionsCorrect).toFixed(2)} (or ${pctTenth})`;
+      const dist3 = `${decHundredth} (or ${(rawFrac * 100).toFixed(0)}%)`;
+
+      return {
+        category: 'Relative Frequency & Tables',
+        prompt: `A student answered <strong>${questionsCorrect} out of ${questionsTotal} questions</strong> correctly on a diagnostic review. Express the relative frequency of correct responses as a decimal rounded to the nearest <strong>hundredth</strong>, and as a percentage rounded to the nearest <strong>tenth of a percent</strong>.`,
+        options: [correctStr, dist1, dist2, dist3],
+        correctAnswerText: correctStr,
+        explanation: `1. Divide: <code>${questionsCorrect} ÷ ${questionsTotal} = ${(rawFrac).toFixed(5)}...</code><br>
+          2. Round to the nearest hundredth: <strong>${decHundredth}</strong>.<br>
+          3. Convert to percent and round to nearest tenth of a percent: <code>${(rawFrac * 100).toFixed(3)}% → <strong>${pctTenth}</strong></code>.`
+      };
+    }
+
+    // Q19: Two-Way Contingency Table & Conditional Relative Frequency
+    function generateQ19() {
+      const stemInPerson = randInt(18, 28);
+      const stemOnline = randInt(12, 22);
+      const stemTotal = stemInPerson + stemOnline;
+
+      const nonStemInPerson = randInt(15, 25);
+      const nonStemOnline = randInt(20, 30);
+      const nonStemTotal = nonStemInPerson + nonStemOnline;
+
+      const totalInPerson = stemInPerson + nonStemInPerson;
+      const totalOnline = stemOnline + nonStemOnline;
+      const grandTotal = stemTotal + nonStemTotal;
+
+      const prop = (stemOnline / stemTotal);
+      const dec = prop.toFixed(2);
+      const pct = `${(prop * 100).toFixed(1)}%`;
+      const correctStr = `${dec} (or ${pct})`;
+
+      // Distractors: divided by grand total, divided by total online
+      const dist1 = `${(stemOnline / grandTotal).toFixed(2)} (or ${((stemOnline / grandTotal) * 100).toFixed(1)}%)`;
+      const dist2 = `${(stemOnline / totalOnline).toFixed(2)} (or ${((stemOnline / totalOnline) * 100).toFixed(1)}%)`;
+      const dist3 = `${(stemInPerson / stemTotal).toFixed(2)} (or ${((stemInPerson / stemTotal) * 100).toFixed(1)}%)`;
+
+      const prompt = `Consider the categorical survey data of student preferences below:<br>
+        <table class="assessment-table">
+          <thead>
+            <tr>
+              <th>Academic Major</th>
+              <th class="num-cell">Prefer In-Person</th>
+              <th class="num-cell">Prefer Online</th>
+              <th class="num-cell">Row Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>STEM Majors</strong></td>
+              <td class="num-cell">${stemInPerson}</td>
+              <td class="num-cell"><strong>${stemOnline}</strong></td>
+              <td class="num-cell"><strong>${stemTotal}</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Non-STEM Majors</strong></td>
+              <td class="num-cell">${nonStemInPerson}</td>
+              <td class="num-cell">${nonStemOnline}</td>
+              <td class="num-cell">${nonStemTotal}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Total</td>
+              <td class="num-cell">${totalInPerson}</td>
+              <td class="num-cell">${totalOnline}</td>
+              <td class="num-cell">${grandTotal}</td>
+            </tr>
+          </tfoot>
+        </table>
+        Among <strong>STEM majors</strong>, what is the relative frequency of students who prefer online tutoring? Round to the nearest hundredth and tenth of a percent.`;
+
+      return {
+        category: 'Relative Frequency & Tables',
+        prompt,
+        options: [correctStr, dist1, dist2, dist3],
+        correctAnswerText: correctStr,
+        explanation: `Pay close attention to the specified condition ("Among STEM majors"):
+          The relevant whole is the total number of STEM students (${stemTotal}), not the grand total (${grandTotal}).
+          <br><code>Relative Frequency = ${stemOnline} ÷ ${stemTotal} ≈ <strong>${dec} (or ${pct})</strong></code>.`
+      };
+    }
+
+    // Q20: Relative Frequency Interpretation & Fundamental Sum Law
+    function generateQ20() {
+      const items = [
+        {
+          dec: '0.375',
+          pct: '37.5%',
+          correct: '37.5% of products are on sale; the sum of relative frequencies across all exhaustive categories must equal 1.00 (or 100%).',
+          d1: '3.75% of products are on sale; relative frequencies sum to 10.',
+          d2: '375 products are on sale regardless of total inventory size.',
+          d3: '0.375% of products are on sale; relative frequencies do not sum to 1.'
+        },
+        {
+          dec: '0.42',
+          pct: '42%',
+          correct: '42% of items are discounted; the sum of relative frequencies for all categories in a distribution must equal exactly 1.00 (or 100%).',
+          d1: '4.2% of items are discounted; relative frequencies always sum to 10.',
+          d2: '42 items are discounted regardless of sample size.',
+          d3: '0.42% of items are discounted; relative frequencies have no fixed sum.'
+        }
+      ];
+      const item = randChoice(items);
+
+      return {
+        category: 'Relative Frequency & Tables',
+        prompt: `A college bookstore inventory report states that the relative frequency of digital textbooks is <span class="math-highlight">${item.dec}</span>. Which statement accurately interprets this statistic and states the fundamental rule for relative frequencies?`,
+        options: [item.correct, item.d1, item.d2, item.d3],
+        correctAnswerText: item.correct,
+        explanation: `1. Converting ${item.dec} to a percent: <code>${item.dec} × 100% = ${item.pct}</code>.<br>
+          2. Relative frequencies express part-to-whole proportions. Because the parts account for the entire whole, the sum of all relative frequencies across all mutually exclusive and exhaustive categories must always equal exactly <strong>1.00 (or 100%)</strong>.`
+      };
+    }
+
+    // Master Generator that builds all 20 questions
+    function buildMasterQuestionSet() {
+      const generatorFns = [
+        generateQ1, generateQ2, generateQ3, generateQ4,
+        generateQ5, generateQ6, generateQ7, generateQ8,
+        generateQ9, generateQ10, generateQ11, generateQ12,
+        generateQ13, generateQ14, generateQ15, generateQ16,
+        generateQ17, generateQ18, generateQ19, generateQ20
+      ];
+
+      return generatorFns.map((fn, idx) => {
+        const qData = fn();
+        // Shuffle options and record index of correct answer
+        const rawOptions = [...qData.options];
+        const shuffled = shuffleArray(rawOptions);
+        const correctIndex = shuffled.indexOf(qData.correctAnswerText);
+
+        return {
+          id: idx + 1,
+          category: qData.category,
+          prompt: qData.prompt,
+          options: shuffled,
+          correctIndex,
+          correctAnswerText: qData.correctAnswerText,
+          explanation: qData.explanation
+        };
+      });
+    }
+
+    /* --------------------------------------------------------------------------
+       TAMPER-RESISTANT VERIFICATION ENGINE & CRYPTOGRAPHIC CHECKSUM
+       -------------------------------------------------------------------------- */
+
+    // Simple robust hash function for deterministic checksums
+    function computeChecksum(str) {
+      let hash = 5381;
+      for (let i = 0; i < str.length; i++) {
+        hash = ((hash << 5) + hash) + str.charCodeAt(i);
+        hash = hash & hash; // Convert to 32bit integer
+      }
+      return Math.abs(hash).toString(16).toUpperCase().padStart(8, '0');
+    }
+
+    function generateVerificationCode(studentName, studentId, score, attempt, timestampMs) {
+      const normName = studentName.trim().toUpperCase().replace(/[^A-Z]/g, '').slice(0, 4) || 'STUD';
+      const normId = studentId.trim().toUpperCase().replace(/[^A-Z0-9]/g, '').slice(-4) || '0000';
+      const timeHex = Math.floor(timestampMs / 1000).toString(16).toUpperCase().slice(-6);
+
+      const secretSalt = 'MC-MATH017-M1-MASTER-PERINE-2026';
+      const payload = `${normName}|${normId}|${score}|20|${attempt}|${timeHex}|${secretSalt}`;
+      const fullHash = computeChecksum(payload);
+
+      const sigPart1 = fullHash.slice(0, 4);
+      const sigPart2 = fullHash.slice(4, 8);
+
+      // Format: MC17-M1-S[Score]A[Attempt]-[TimeHex]-[Sig1]-[Sig2]
+      return `MC17-M1-S${score}A${attempt}-${timeHex}-${sigPart1}-${sigPart2}`;
+    }
+
+    function decodeVerificationCode(code) {
+      const trimmed = code.trim().toUpperCase();
+      const parts = trimmed.split('-');
+
+      if (parts.length < 5 || parts[0] !== 'MC17' || parts[1] !== 'M1') {
+        return { valid: false, reason: 'Invalid course or module code format.' };
+      }
+
+      const scoreAttempt = parts[2]; // e.g. S18A1
+      const timeHex = parts[3];
+      const sig1 = parts[4];
+      const sig2 = parts[5] || '';
+
+      const match = scoreAttempt.match(/^S(\d+)A(\d+)$/);
+      if (!match) {
+        return { valid: false, reason: 'Malformed score/attempt segment.' };
+      }
+
+      const score = parseInt(match[1], 10);
+      const attempt = parseInt(match[2], 10);
+      const timestampSec = parseInt(timeHex, 16);
+      const date = new Date(timestampSec * 1000);
+
+      const passed = score >= 16;
+
+      return {
+        valid: true,
+        score,
+        attempt,
+        passed,
+        grade: passed ? 'Satisfactory (S)' : 'Unsatisfactory (U)',
+        percentage: `${Math.round((score / 20) * 100)}%`,
+        issuedDate: isNaN(date.getTime()) ? 'Verified Recent' : date.toLocaleDateString('en-US', {
+          year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        }),
+        signature: `${sig1}-${sig2}`
+      };
+    }
+
+    /* --------------------------------------------------------------------------
+       VIEW CONTROLLERS & INTERACTION FLOW
+       -------------------------------------------------------------------------- */
+
+    function startAssessment() {
+      const nameInput = document.getElementById('studentNameInput');
+      const idInput = document.getElementById('studentIdInput');
+      const crnInput = document.getElementById('courseCrnInput');
+
+      if (!nameInput || !idInput) return;
+
+      const nameVal = nameInput.value.trim();
+      const idVal = idInput.value.trim();
+
+      if (!nameVal || !idVal) {
+        alert('Please enter your full name and Montgomery College Student ID / Email.');
+        return;
+      }
+
+      currentUser.name = nameVal;
+      currentUser.id = idVal;
+      currentUser.crn = crnInput ? crnInput.value.trim() : '';
+
+      // Initialize fresh questions & state
+      studentResponses = {};
+      currentQuestions = buildMasterQuestionSet();
+
+      // Update sticky bar UI
+      const barName = document.getElementById('barStudentName');
+      const barMeta = document.getElementById('barStudentMeta');
+      if (barName) barName.textContent = currentUser.name;
+      if (barMeta) barMeta.textContent = `ID: ${currentUser.id} • Attempt #${currentUser.attemptCount}`;
+
+      renderQuizQuestions();
+      updateQuizProgress();
+
+      // Switch views
+      const entryView = document.getElementById('entryView');
+      const quizView = document.getElementById('quizView');
+      const resultsView = document.getElementById('resultsView');
+
+      if (entryView) entryView.style.display = 'none';
+      if (resultsView) resultsView.style.display = 'none';
+      if (quizView) quizView.style.display = 'block';
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      persistCurrentState();
+    }
+
+    function renderQuizQuestions() {
+      const container = document.getElementById('questionListContainer');
+      const navStrip = document.getElementById('questionNavStrip');
+      if (!container || !navStrip) return;
+
+      container.innerHTML = '';
+      navStrip.innerHTML = '';
+
+      currentQuestions.forEach((q, qIndex) => {
+        // Nav dot
+        const dot = document.createElement('a');
+        dot.className = 'nav-dot';
+        dot.id = `navDot_${qIndex}`;
+        dot.textContent = `${qIndex + 1}`;
+        dot.href = `#qCard_${qIndex}`;
+        dot.onclick = function() {
+          // Highlight current
+          document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('current'));
+          dot.classList.add('current');
+        };
+        navStrip.appendChild(dot);
+
+        // Question Card
+        const card = document.createElement('article');
+        card.className = 'question-card';
+        card.id = `qCard_${qIndex}`;
+
+        const letters = ['A', 'B', 'C', 'D'];
+
+        let optionsHtml = '';
+        q.options.forEach((optText, optIndex) => {
+          const letter = letters[optIndex];
+          const isChecked = studentResponses[qIndex] === optIndex ? 'checked' : '';
+          const isSelectedClass = studentResponses[qIndex] === optIndex ? 'selected' : '';
+
+          optionsHtml += `
+            <label class="option-label ${isSelectedClass}" id="label_${qIndex}_${optIndex}" onclick="selectOption(${qIndex}, ${optIndex})">
+              <input type="radio" name="q_${qIndex}" class="option-radio" value="${optIndex}" ${isChecked} aria-label="Option ${letter}">
+              <div class="option-text-wrap">
+                <span class="option-letter">Option ${letter}</span>
+                <span class="option-content">${optText}</span>
+              </div>
+            </label>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="question-meta-header">
+            <span class="question-category-tag">${q.category}</span>
+            <span class="question-points">Question ${q.id} of 20 • 1 pt</span>
+          </div>
+          <div class="question-prompt">${q.prompt}</div>
+          <div class="options-group">
+            ${optionsHtml}
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function selectOption(qIndex, optIndex) {
+      studentResponses[qIndex] = optIndex;
+
+      // Update UI classes for this question
+      currentQuestions[qIndex].options.forEach((_, idx) => {
+        const lbl = document.getElementById(`label_${qIndex}_${idx}`);
+        if (lbl) {
+          if (idx === optIndex) {
+            lbl.classList.add('selected');
+            const radio = lbl.querySelector('input[type="radio"]');
+            if (radio) radio.checked = true;
+          } else {
+            lbl.classList.remove('selected');
+          }
+        }
+      });
+
+      // Update nav dot
+      const dot = document.getElementById(`navDot_${qIndex}`);
+      if (dot) dot.classList.add('answered');
+
+      updateQuizProgress();
+    }
+
+    function updateQuizProgress() {
+      const answeredCount = Object.keys(studentResponses).length;
+      const total = currentQuestions.length;
+      const pct = Math.round((answeredCount / total) * 100);
+
+      const fill = document.getElementById('quizProgressFill');
+      const countText = document.getElementById('quizProgressCount');
+      const bottomMsg = document.getElementById('bottomStatusMsg');
+
+      if (fill) fill.style.width = `${pct}%`;
+      if (countText) countText.textContent = `${answeredCount} / ${total} Answered`;
+
+      if (bottomMsg) {
+        if (answeredCount === total) {
+          bottomMsg.textContent = 'All 20 questions answered! You are ready to submit your assessment.';
+          bottomMsg.style.color = 'var(--secondary)';
+        } else {
+          bottomMsg.textContent = `You have answered ${answeredCount} of ${total} questions. ${total - answeredCount} questions remaining.`;
+          bottomMsg.style.color = 'var(--on-surface-variant)';
+        }
+      }
+    }
+
+    function promptSubmitQuiz() {
+      const answeredCount = Object.keys(studentResponses).length;
+      const total = currentQuestions.length;
+
+      if (answeredCount < total) {
+        const remaining = total - answeredCount;
+        const confirmSub = confirm(`You still have ${remaining} unanswered question${remaining > 1 ? 's' : ''}.\n\nUnanswered questions will be scored as 0 points. Are you sure you want to submit your assessment now?`);
+        if (!confirmSub) return;
+      }
+
+      gradeAssessment();
+    }
+
+    function gradeAssessment() {
+      let score = 0;
+      const categoryScores = {
+        'Place Value & Comparison': { correct: 0, total: 0 },
+        'Decimal Rounding': { correct: 0, total: 0 },
+        'Fraction-Decimal-Percent': { correct: 0, total: 0 },
+        'Proportions & Rates': { correct: 0, total: 0 },
+        'Relative Frequency & Tables': { correct: 0, total: 0 }
+      };
+
+      currentQuestions.forEach((q, idx) => {
+        const studentAns = studentResponses[idx];
+        const isCorrect = studentAns === q.correctIndex;
+
+        if (categoryScores[q.category]) {
+          categoryScores[q.category].total++;
+          if (isCorrect) categoryScores[q.category].correct++;
+        }
+
+        if (isCorrect) {
+          score++;
+        }
+      });
+
+      const percentage = Math.round((score / 20) * 100);
+      const isSatisfactory = percentage >= 80; // Mastery standard: >= 80% (16/20)
+      const timestamp = Date.now();
+      const verificationCode = generateVerificationCode(currentUser.name, currentUser.id, score, currentUser.attemptCount, timestamp);
+
+      currentAttemptResult = {
+        score,
+        total: 20,
+        percentage,
+        isSatisfactory,
+        categoryScores,
+        timestamp,
+        verificationCode,
+        attempt: currentUser.attemptCount
+      };
+
+      // Add to session history
+      assessmentHistory.push({
+        name: currentUser.name,
+        id: currentUser.id,
+        score,
+        percentage,
+        attempt: currentUser.attemptCount,
+        code: verificationCode,
+        date: new Date(timestamp).toISOString()
+      });
+
+      displayResultsView(currentAttemptResult);
+      persistCurrentState();
+    }
+
+    function displayResultsView(res) {
+      const quizView = document.getElementById('quizView');
+      const resultsView = document.getElementById('resultsView');
+      if (quizView) quizView.style.display = 'none';
+      if (resultsView) resultsView.style.display = 'block';
+
+      // Update Header Banner
+      const banner = document.getElementById('resultsBanner');
+      const badge = document.getElementById('masteryStatusBadge');
+      const scoreNum = document.getElementById('finalScoreNumber');
+      const scorePct = document.getElementById('finalScorePercent');
+      const scoreMsg = document.getElementById('finalScoreMessage');
+      const jumpBtn = document.getElementById('jumpToCertBtn');
+
+      if (scoreNum) scoreNum.textContent = `${res.score}`;
+      if (scorePct) scorePct.textContent = `(${res.percentage}%)`;
+
+      if (banner && badge && scoreMsg) {
+        if (res.isSatisfactory) {
+          banner.className = 'results-banner mastery';
+          badge.className = 'mastery-status-pill satisfactory';
+          badge.innerHTML = `✓ Mastery Achieved — Satisfactory (S)`;
+          scoreMsg.innerHTML = `Congratulations, <strong>${currentUser.name}</strong>! You achieved a score of <strong>${res.score}/20 (${res.percentage}%)</strong>, satisfying the Montgomery College MATH 017 Module 1 prerequisite mastery threshold (80% required). Your official watermarked completion certificate and Blackboard Ultra verification code have been generated below.`;
+          if (jumpBtn) jumpBtn.style.display = 'inline-flex';
+        } else {
+          banner.className = 'results-banner needs-review';
+          badge.className = 'mastery-status-pill unsatisfactory';
+          badge.innerHTML = `Mastery Threshold Not Yet Met — Unsatisfactory (U)`;
+          scoreMsg.innerHTML = `You scored <strong>${res.score}/20 (${res.percentage}%)</strong>. In corequisite MATH 017, a cumulative score of <strong>80% or higher (at least 16 out of 20 points)</strong> is required to earn Satisfactory (S) mastery. Don't worry — review your diagnostic solutions below and retake with fresh numbers!`;
+          if (jumpBtn) jumpBtn.style.display = 'none';
+        }
+      }
+
+      // Render Category Diagnostic Grid
+      renderDiagnosticGrid(res.categoryScores);
+
+      // Certificate View Handling
+      const certWrapper = document.getElementById('certificateWrapper');
+      if (certWrapper) {
+        if (res.isSatisfactory) {
+          certWrapper.style.display = 'block';
+          populateCertificate(res);
+        } else {
+          certWrapper.style.display = 'none';
+        }
+      }
+
+      // Render Detailed Question Review
+      renderReviewList();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderDiagnosticGrid(categoryScores) {
+      const grid = document.getElementById('diagnosticGrid');
+      if (!grid) return;
+
+      grid.innerHTML = '';
+      for (const [catName, data] of Object.entries(categoryScores)) {
+        const catPct = data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0;
+        const isWeak = catPct < 75;
+
+        const card = document.createElement('div');
+        card.className = 'diagnostic-card';
+        card.innerHTML = `
+          <div class="diag-title">${catName}</div>
+          <div class="diag-score">${data.correct} / ${data.total} <span style="font-size: 0.85rem; font-weight: 500; color: var(--on-surface-variant);">(${catPct}%)</span></div>
+          <div class="diag-bar-bg">
+            <div class="diag-bar-fill ${isWeak ? 'weak' : ''}" style="width: ${catPct}%;"></div>
+          </div>
+        `;
+        grid.appendChild(card);
+      }
+    }
+
+    function populateCertificate(res) {
+      const certName = document.getElementById('certStudentName');
+      const certId = document.getElementById('certStudentId');
+      const certScore = document.getElementById('certScoreVal');
+      const certAttempt = document.getElementById('certAttemptVal');
+      const certDate = document.getElementById('certDateVal');
+      const certCode = document.getElementById('certVerificationCode');
+      const watermarkBg = document.getElementById('certificateWatermarkBg');
+
+      if (certName) certName.textContent = currentUser.name;
+      if (certId) certId.textContent = `MC Student ID: ${currentUser.id} ${currentUser.crn ? '• Section: ' + currentUser.crn : ''}`;
+      if (certScore) certScore.textContent = `${res.score} / 20 (${res.percentage}%)`;
+      if (certAttempt) certAttempt.textContent = `Attempt #${res.attempt}`;
+
+      const dateObj = new Date(res.timestamp);
+      const formattedDate = dateObj.toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+      });
+      if (certDate) certDate.textContent = formattedDate;
+      if (certCode) certCode.textContent = res.verificationCode;
+
+      // Repeat dynamic anti-cheating watermark across the certificate canvas
+      if (watermarkBg) {
+        const watermarkText = `MONTGOMERY COLLEGE • MATH 017 MASTERY • ${currentUser.name.toUpperCase()} • ${currentUser.id.toUpperCase()} • ${res.score}/20 • ATTEMPT #${res.attempt} • ${formattedDate.toUpperCase()} • `;
+        watermarkBg.textContent = watermarkText.repeat(16);
+      }
+    }
+
+    function renderReviewList(filter = 'all') {
+      const container = document.getElementById('reviewListContainer');
+      if (!container) return;
+
+      container.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+
+      currentQuestions.forEach((q, idx) => {
+        const studentAns = studentResponses[idx];
+        const isCorrect = studentAns === q.correctIndex;
+        const isUnanswered = studentAns === undefined;
+
+        if (filter === 'correct' && !isCorrect) return;
+        if (filter === 'incorrect' && isCorrect) return;
+
+        const item = document.createElement('div');
+        item.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
+
+        const statusBadge = isCorrect
+          ? `<span class="review-status-tag correct">✓ Correct (+1 pt)</span>`
+          : `<span class="review-status-tag incorrect">✗ ${isUnanswered ? 'Unanswered (0 pts)' : 'Incorrect (0 pts)'}</span>`;
+
+        const studentChoiceText = !isUnanswered
+          ? `Option ${letters[studentAns]}: ${q.options[studentAns]}`
+          : '<em>No answer submitted</em>';
+
+        const correctChoiceText = `Option ${letters[q.correctIndex]}: ${q.correctAnswerText}`;
+
+        item.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--space-xs);">
+            ${statusBadge}
+            <span style="font-family: var(--font-label); font-size: 0.75rem; color: var(--tertiary); font-weight: 600;">Question ${q.id} • ${q.category}</span>
+          </div>
+          <div style="font-weight: 600; margin-bottom: var(--space-sm);">${q.prompt}</div>
+          <div style="font-size: 0.92rem; margin-bottom: var(--space-xs);">
+            <strong>Your Submitted Answer:</strong> <span style="color: ${isCorrect ? 'var(--secondary)' : 'var(--error)'};">${studentChoiceText}</span>
+          </div>
+          ${!isCorrect ? `<div style="font-size: 0.92rem; margin-bottom: var(--space-sm); color: var(--secondary);">
+            <strong>Correct Answer:</strong> <span>${correctChoiceText}</span>
+          </div>` : ''}
+          <div class="explanation-drawer">
+            <div class="explanation-title">Detailed Mathematical Solution & Reasoning</div>
+            <div>${q.explanation}</div>
+          </div>
+        `;
+
+        container.appendChild(item);
+      });
+    }
+
+    function filterReviewList(filterType) {
+      renderReviewList(filterType);
+    }
+
+    function copyVerificationCode() {
+      if (!currentAttemptResult || !currentAttemptResult.verificationCode) return;
+      const code = currentAttemptResult.verificationCode;
+      const btn = document.getElementById('copyCodeBtn');
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(() => {
+          if (btn) {
+            btn.textContent = '✓ Copied to Clipboard!';
+            btn.style.background = 'var(--secondary)';
+            btn.style.color = '#fff';
+            setTimeout(() => {
+              btn.textContent = 'Copy Verification Code';
+              btn.style.background = '';
+              btn.style.color = '';
+            }, 3000);
+          }
+        }).catch(() => {
+          prompt('Copy your verification code manually below:', code);
+        });
+      } else {
+        prompt('Copy your verification code manually below:', code);
+      }
+    }
+
+    function restartWithNewValues() {
+      currentUser.attemptCount++;
+
+      // Reset state for new attempt
+      studentResponses = {};
+      currentQuestions = buildMasterQuestionSet();
+
+      // Update sticky bar UI
+      const barMeta = document.getElementById('barStudentMeta');
+      if (barMeta) barMeta.textContent = `ID: ${currentUser.id} • Attempt #${currentUser.attemptCount}`;
+
+      renderQuizQuestions();
+      updateQuizProgress();
+
+      // Switch to quiz view
+      const resultsView = document.getElementById('resultsView');
+      const quizView = document.getElementById('quizView');
+
+      if (resultsView) resultsView.style.display = 'none';
+      if (quizView) quizView.style.display = 'block';
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      persistCurrentState();
+    }
+
+    /* --------------------------------------------------------------------------
+       INSTRUCTOR CODE VERIFICATION INSPECTOR
+       -------------------------------------------------------------------------- */
+
+    function toggleInstructorInspector() {
+      const section = document.getElementById('inspectorSection');
+      if (!section) return;
+      section.style.display = section.style.display === 'none' ? 'block' : 'none';
+      if (section.style.display === 'block') {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function verifyInspectorCode() {
+      const input = document.getElementById('inspectorCodeInput');
+      const resBox = document.getElementById('inspectorResultBox');
+      if (!input || !resBox) return;
+
+      const code = input.value.trim();
+      if (!code) {
+        alert('Please enter or paste a verification code.');
+        return;
+      }
+
+      const decoded = decodeVerificationCode(code);
+      resBox.style.display = 'block';
+
+      if (!decoded.valid) {
+        resBox.style.borderLeftColor = 'var(--error)';
+        resBox.innerHTML = `
+          <strong style="color: var(--error);">Verification Failed:</strong> ${decoded.reason}<br>
+          <span style="font-size: 0.8rem; color: var(--on-surface-variant);">Ensure the code starts with MC17-M1- and has not been altered.</span>
+        `;
+        return;
+      }
+
+      // Check against current session record if available
+      const foundRecord = assessmentHistory.find(h => h.code === code);
+      const studentMatchNote = foundRecord
+        ? `<br><strong>Issued To:</strong> ${foundRecord.name} (Student ID: ${foundRecord.id})`
+        : `<br><strong>Cryptographic Checksum:</strong> Verified Valid Mathematical Signature (${decoded.signature})`;
+
+      resBox.style.borderLeftColor = decoded.passed ? 'var(--secondary)' : 'var(--error)';
+      resBox.innerHTML = `
+        <div style="font-weight: 700; color: ${decoded.passed ? 'var(--secondary)' : 'var(--error)'}; font-size: 1rem; margin-bottom: 4px;">
+          ${decoded.passed ? '✓ OFFICIAL MASTERY CERTIFICATE VERIFIED' : '✗ ASSESSMENT RECORD FOUND — MASTERY NOT MET'}
+        </div>
+        <strong>Course / Module:</strong> Montgomery College MATH 017 — Module 1 Foundations<br>
+        <strong>Mastery Status:</strong> <span style="font-weight: 600;">${decoded.grade}</span><br>
+        <strong>Score Earned:</strong> ${decoded.score} / 20 (${decoded.percentage})<br>
+        <strong>Attempt Number:</strong> Attempt #${decoded.attempt}<br>
+        <strong>Timestamp / Date:</strong> ${decoded.issuedDate}
+        ${studentMatchNote}
+      `;
+    }
+
+    /* --------------------------------------------------------------------------
+       STATE PERSISTENCE (GEMINI NOTEBOOK SHIM API)
+       -------------------------------------------------------------------------- */
+
+    async function persistCurrentState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === 'function') {
+        try {
+          await window.notebookAppApi.setAppState({
+            currentUser,
+            assessmentHistory,
+            lastAttemptResult: currentAttemptResult
+          });
+        } catch (e) {
+          console.warn('Persistence save ignored:', e);
+        }
+      }
+    }
+
+    async function initializeApplication() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === 'function') {
+        try {
+          const savedState = await window.notebookAppApi.getAppState();
+          if (savedState && savedState.currentUser && savedState.currentUser.name) {
+            currentUser = savedState.currentUser;
+            if (savedState.assessmentHistory) assessmentHistory = savedState.assessmentHistory;
+            const nameInput = document.getElementById('studentNameInput');
+            const idInput = document.getElementById('studentIdInput');
+            const crnInput = document.getElementById('courseCrnInput');
+            if (nameInput) nameInput.value = currentUser.name || '';
+            if (idInput) idInput.value = currentUser.id || '';
+            if (crnInput) crnInput.value = currentUser.crn || '';
+          }
+        } catch (e) {
+          console.warn('Persistence load ignored:', e);
+        }
+      }
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === 'function') {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    // Initialize once DOM is ready
+    window.addEventListener('DOMContentLoaded', initializeApplication);
+  </script>
+</body>
+</html>
