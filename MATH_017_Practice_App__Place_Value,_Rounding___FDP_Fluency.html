@@ -1,0 +1,2928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="artifact-type" content="tool">
+<meta name="design-style" content="handbook">
+<title>MC MATH 017 | Worksheet #1 Interactive Practice Trainer</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  color-scheme: light;
+
+  /* Page and surfaces - Handbook Style */
+  --background: #ffffff;
+  --surface-container-low: #f3f2f1;
+  --surface-container: #e8e7e5;
+  --surface-container-high: #dbdad9;
+
+  /* Ink */
+  --on-surface: #0b0c0c;
+  --on-surface-variant: #505a5f;
+
+  /* Rules & Borders */
+  --outline: #0b0c0c;
+  --outline-variant: #b1b4b6;
+
+  /* Accents */
+  --primary: #162e51;                  /* MC Deep Navy */
+  --on-primary: #ffffff;
+  --primary-container: #d2e2f1;        /* Pale blue notice */
+  --on-primary-container: #0c2d4a;     /* Dark blue text on pale blue */
+  --secondary: #4c2c92;                /* Visited/Academic Purple */
+  --tertiary: #1a569e;                 /* Link / Instructional Blue */
+  --error: #d4351c;                    /* Error Red */
+  --on-error: #ffffff;
+
+  /* Semantic */
+  --positive: #00703c;                 /* Success Green */
+  --on-positive: #ffffff;
+  --positive-container: #d6eedd;
+  --on-positive-container: #004423;
+  --warning: #b25d00;
+  --warning-container: #fff1d6;
+  --on-warning-container: #592e00;
+
+  /* Focus Ring */
+  --focus-yellow: #ffdd00;
+  --focus: #ffdd00;
+
+  /* Data Series */
+  --data-1: #1a569e;
+  --data-2: #c75a0a;
+  --data-3: #28a197;
+  --data-4: #4c2c92;
+  --data-context: #b1b4b6;
+
+  /* Typography */
+  --font-headline: 'Public Sans', sans-serif;
+  --font-body: 'Public Sans', sans-serif;
+  --font-label: 'Public Sans', sans-serif;
+
+  /* Type Scale - Focused Tool */
+  --display-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.1rem);
+  --headline-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.45rem);
+  --subhead-size: clamp(1.05rem, 0.98rem + 0.25vw, 1.15rem);
+  --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+  --label-size: 0.75rem;
+
+  /* Spacing Scale (4pt base) */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.25rem;
+  --space-2xl: 3.5rem;
+
+  /* Shape */
+  --rounded: 0px;
+  --rounded-lg: 0px;
+  --rounded-full: 0px;
+
+  /* Handbook Style Effects */
+  --top-index-rule: 6px solid var(--primary);
+  --inset-rule: 4px solid var(--tertiary);
+  --button-ground: 0 3px 0 #091526;
+  --button-ground-secondary: 0 2px 0 #858686;
+  --button-ground-positive: 0 3px 0 #004423;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-short: 180ms;
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--background);
+  color: var(--on-surface);
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  line-height: 1.5;
+  overflow-x: clip;
+  min-height: 100vh;
+}
+
+/* High Contrast Focus Visibility */
+:focus-visible {
+  outline: 3px solid var(--focus-yellow) !important;
+  outline-offset: 1px !important;
+  box-shadow: inset 0 0 0 2px var(--on-surface) !important;
+}
+
+/* Page Layout */
+.app-header {
+  border-top: var(--top-index-rule);
+  background-color: var(--surface-container-low);
+  border-bottom: 1px solid var(--outline-variant);
+  padding: var(--space-md) var(--space-lg);
+}
+
+.header-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.institution-tagline {
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  color: var(--tertiary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.app-title {
+  font-family: var(--font-headline);
+  font-size: var(--display-size);
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.app-subtitle {
+  color: var(--on-surface-variant);
+  font-size: var(--subhead-size);
+  max-width: 78ch;
+}
+
+.benchmark-badge-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+  margin-top: var(--space-xs);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 2px var(--space-sm);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--outline);
+}
+
+.badge-navy {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border-color: var(--primary);
+}
+
+.badge-info {
+  background-color: var(--primary-container);
+  color: var(--on-primary-container);
+  border-color: var(--tertiary);
+}
+
+.badge-mastery {
+  background-color: var(--warning-container);
+  color: var(--on-warning-container);
+  border-color: var(--warning);
+}
+
+/* Main Workspace Container */
+.main-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: var(--space-lg);
+}
+
+@media (max-width: 900px) {
+  .main-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Top Stats & Mode Bar */
+.mode-nav-bar {
+  grid-column: 1 / -1;
+  background-color: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.mode-selector-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  align-items: center;
+}
+
+.mode-btn {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: var(--space-xs) var(--space-md);
+  background-color: var(--background);
+  color: var(--on-surface);
+  border: 2px solid var(--outline);
+  cursor: pointer;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  transition: background-color var(--dur-short) var(--ease-out);
+}
+
+.mode-btn:hover {
+  background-color: var(--surface-container-high);
+}
+
+.mode-btn.active {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border-color: var(--primary);
+  box-shadow: var(--button-ground);
+}
+
+.stats-summary-strip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-size: 0.85rem;
+}
+
+.stat-pill {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+}
+
+.stat-pill-label {
+  color: var(--on-surface-variant);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.stat-pill-val {
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--on-surface);
+}
+
+.streak-highlight {
+  color: #a34e00;
+}
+
+/* Practice Card Container */
+.practice-main-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.card {
+  background-color: var(--background);
+  border: 2px solid var(--outline);
+  padding: var(--space-lg);
+  position: relative;
+}
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--outline-variant);
+  margin-bottom: var(--space-md);
+}
+
+.card-kicker {
+  font-size: var(--label-size);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--tertiary);
+}
+
+.card-title {
+  font-family: var(--font-headline);
+  font-size: var(--headline-size);
+  font-weight: 800;
+  color: var(--on-surface);
+  margin-top: 2px;
+}
+
+.skill-tab-scroller {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.skill-tab {
+  background-color: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  color: var(--on-surface);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: var(--space-xs) var(--space-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.skill-tab:hover {
+  background-color: var(--surface-container);
+}
+
+.skill-tab.active {
+  background-color: var(--tertiary);
+  color: #ffffff;
+  border-color: var(--tertiary);
+  font-weight: 700;
+}
+
+/* Problem Prompt Box */
+.problem-box {
+  background-color: var(--surface-container-low);
+  border-left: var(--inset-rule);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.problem-context {
+  font-size: 0.9rem;
+  color: var(--on-surface-variant);
+  margin-bottom: var(--space-xs);
+}
+
+.problem-prompt {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--on-surface);
+  line-height: 1.4;
+}
+
+.number-display-hero {
+  font-family: var(--font-headline);
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin: var(--space-sm) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+/* Comparison UI */
+.comparison-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  padding: var(--space-md) 0;
+  flex-wrap: wrap;
+}
+
+.compare-num-box {
+  background: #ffffff;
+  border: 2px solid var(--outline);
+  padding: var(--space-md) var(--space-lg);
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  min-width: 140px;
+  text-align: center;
+}
+
+.compare-btn-group {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.compare-choice-btn {
+  font-size: 1.5rem;
+  font-weight: 800;
+  width: 58px;
+  height: 52px;
+  background-color: var(--surface-container-low);
+  border: 2px solid var(--outline);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--dur-short);
+}
+
+.compare-choice-btn:hover {
+  background-color: var(--surface-container);
+}
+
+.compare-choice-btn.selected {
+  background-color: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+  box-shadow: var(--button-ground);
+}
+
+/* Place Value Lineup Table */
+.place-value-table-wrap {
+  overflow-x: auto;
+  margin: var(--space-md) 0;
+  border: 1px solid var(--outline);
+  background-color: #ffffff;
+}
+
+.place-value-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.place-value-table th {
+  background-color: var(--primary);
+  color: #ffffff;
+  padding: var(--space-xs) var(--space-sm);
+  font-weight: 700;
+  border: 1px solid var(--outline);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.place-value-table td {
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--outline-variant);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.pv-highlight {
+  background-color: #fff2a8 !important;
+  color: #0b0c0c;
+  font-weight: 900;
+}
+
+.pv-diff {
+  background-color: #ffd2cc !important;
+  color: var(--error);
+  font-weight: 900;
+}
+
+.pv-padded-zero {
+  color: var(--outline-variant);
+  font-style: italic;
+}
+
+/* Form Controls & Inputs */
+.input-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.field-label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--on-surface);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.field-hint {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--on-surface-variant);
+}
+
+.input-with-affix {
+  display: flex;
+  align-items: stretch;
+  max-width: 360px;
+}
+
+.affix-box {
+  background-color: var(--surface-container);
+  border: 2px solid var(--outline);
+  border-right: none;
+  padding: 0 var(--space-sm);
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  color: var(--on-surface-variant);
+  font-size: 0.95rem;
+}
+
+.affix-box.affix-right {
+  border-right: 2px solid var(--outline);
+  border-left: none;
+}
+
+.text-input {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: var(--space-xs) var(--space-sm);
+  border: 2px solid var(--outline);
+  color: var(--on-surface);
+  background-color: #ffffff;
+  width: 100%;
+  min-height: 48px;
+  font-variant-numeric: tabular-nums;
+}
+
+.text-input:focus {
+  outline: 3px solid var(--focus-yellow);
+  box-shadow: inset 0 0 0 2px var(--on-surface);
+}
+
+.actions-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+  margin-top: var(--space-md);
+}
+
+.btn-primary {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 800;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border: 2px solid var(--outline);
+  box-shadow: var(--button-ground);
+  padding: var(--space-xs) var(--space-lg);
+  cursor: pointer;
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  transition: background-color var(--dur-short);
+}
+
+.btn-primary:hover {
+  background-color: #21406e;
+}
+
+.btn-primary:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.btn-secondary {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  background-color: var(--surface-container-low);
+  color: var(--on-surface);
+  border: 2px solid var(--outline);
+  box-shadow: var(--button-ground-secondary);
+  padding: var(--space-xs) var(--space-md);
+  cursor: pointer;
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.btn-secondary:hover {
+  background-color: var(--surface-container);
+}
+
+.btn-secondary:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.btn-positive {
+  background-color: var(--positive);
+  color: #ffffff;
+  border-color: #004423;
+  box-shadow: var(--button-ground-positive);
+}
+
+.btn-positive:hover {
+  background-color: #005a30;
+}
+
+/* Feedback & Explanation Box */
+.feedback-box {
+  margin-top: var(--space-lg);
+  border: 2px solid var(--outline);
+  padding: var(--space-md);
+  display: none;
+}
+
+.feedback-box.show {
+  display: block;
+}
+
+.feedback-correct {
+  background-color: var(--positive-container);
+  border-color: var(--positive);
+}
+
+.feedback-incorrect {
+  background-color: #fff5f5;
+  border-color: var(--error);
+}
+
+.feedback-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: var(--space-xs);
+}
+
+.feedback-correct .feedback-header {
+  color: var(--positive);
+}
+
+.feedback-incorrect .feedback-header {
+  color: var(--error);
+}
+
+.misconception-callout {
+  background-color: #fff1d6;
+  border-left: 4px solid var(--warning);
+  padding: var(--space-sm);
+  margin: var(--space-sm) 0;
+  font-size: 0.88rem;
+  color: var(--on-warning-container);
+}
+
+.misconception-title {
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.explanation-steps {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-sm);
+  border-top: 1px dashed var(--outline-variant);
+  font-size: 0.92rem;
+}
+
+.explanation-steps ol {
+  padding-left: var(--space-lg);
+  margin-top: var(--space-xs);
+}
+
+.explanation-steps li {
+  margin-bottom: var(--space-xs);
+}
+
+/* Count Table Styling for Skill 5 */
+.stat-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  border: 2px solid var(--outline);
+}
+
+.stat-table th {
+  background-color: var(--primary);
+  color: #ffffff;
+  padding: var(--space-xs) var(--space-sm);
+  text-align: left;
+  font-weight: 700;
+}
+
+.stat-table td {
+  padding: var(--space-xs) var(--space-sm);
+  border-bottom: 1px solid var(--outline-variant);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-table tr:nth-child(even) td {
+  background-color: var(--surface-container-low);
+}
+
+.stat-table tr.highlight-target td {
+  background-color: #eaf1fb;
+  font-weight: 800;
+}
+
+.stat-table tr.total-row td {
+  border-top: 2px solid var(--outline);
+  font-weight: 800;
+  background-color: var(--surface-container);
+}
+
+/* Right Sidebar: Aids, Mastery Tracker & Guidelines */
+.sidebar-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.sidebar-card {
+  background-color: var(--background);
+  border: 1px solid var(--outline);
+  padding: var(--space-md);
+}
+
+.sidebar-heading {
+  font-family: var(--font-headline);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 4px;
+  margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mastery-progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.mastery-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mastery-item-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.mastery-bar-track {
+  height: 8px;
+  background-color: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  position: relative;
+}
+
+.mastery-bar-fill {
+  height: 100%;
+  background-color: var(--primary);
+  transition: width var(--dur-short) var(--ease-out);
+}
+
+.mastery-bar-fill.achieved {
+  background-color: var(--positive);
+}
+
+.target-80-marker {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  left: 80%;
+  width: 2px;
+  background-color: var(--error);
+  z-index: 2;
+}
+
+/* Reference Aid Drawer */
+.reference-card {
+  background-color: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  padding: var(--space-md);
+}
+
+.accordion-trigger {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--tertiary);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-xs) 0;
+}
+
+.accordion-trigger:hover {
+  text-decoration: underline;
+}
+
+.accordion-content {
+  display: none;
+  padding-top: var(--space-sm);
+  font-size: 0.82rem;
+  color: var(--on-surface-variant);
+}
+
+.accordion-content.open {
+  display: block;
+}
+
+.pv-strip {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  text-align: center;
+  border: 1px solid var(--outline);
+  background: #ffffff;
+  margin: var(--space-xs) 0;
+  font-size: 0.75rem;
+}
+
+.pv-strip-cell {
+  padding: 4px 2px;
+  border-right: 1px solid var(--outline-variant);
+}
+
+.pv-strip-cell:last-child {
+  border-right: none;
+}
+
+.pv-strip-cell strong {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--primary);
+}
+
+/* Number Line SVG Container */
+.number-line-container {
+  margin: var(--space-sm) 0;
+  background: #ffffff;
+  border: 1px solid var(--outline-variant);
+  padding: var(--space-xs);
+}
+
+/* Set / Challenge Mode Progress Ribbon */
+.challenge-ribbon {
+  background-color: var(--primary-container);
+  border: 1px solid var(--tertiary);
+  padding: var(--space-xs) var(--space-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--on-primary-container);
+  margin-bottom: var(--space-md);
+}
+
+.step-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.step-dot {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--outline);
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.step-dot.active {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.step-dot.correct {
+  background-color: var(--positive);
+  color: #ffffff;
+  border-color: #004423;
+}
+
+.step-dot.incorrect {
+  background-color: var(--error);
+  color: #ffffff;
+  border-color: #8b1808;
+}
+
+/* Report Card Modal/View */
+.report-modal {
+  background-color: #ffffff;
+  border: 3px solid var(--primary);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.report-header {
+  text-align: center;
+  border-bottom: 2px solid var(--outline);
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.report-title {
+  font-family: var(--font-headline);
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: var(--primary);
+}
+
+.report-grade-badge {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-lg);
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-top: var(--space-sm);
+  border: 2px solid var(--outline);
+}
+
+.grade-s {
+  background-color: var(--positive-container);
+  color: var(--positive);
+  border-color: var(--positive);
+}
+
+.grade-u {
+  background-color: #fff1d6;
+  color: var(--warning);
+  border-color: var(--warning);
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  font-size: 0.88rem;
+}
+
+.report-table th, .report-table td {
+  border: 1px solid var(--outline-variant);
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.report-table th {
+  background-color: var(--surface-container-low);
+  font-weight: 700;
+  text-align: left;
+}
+
+/* Accessibility & Utilities */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.text-bold { font-weight: 700; }
+.text-mono { font-family: monospace; }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-container">
+    <div class="institution-tagline">
+      <span>Montgomery College</span>
+      <span>•</span>
+      <span>Department of Mathematics, Computer, and Data Science</span>
+    </div>
+    <h1 class="app-title">MATH 017: Worksheet #1 Interactive Practice Trainer</h1>
+    <p class="app-subtitle">
+      Corequisite Foundations for MATH 117 (Elements of Statistics). Master place-value comparisons, multi-step rounding, small percentage arithmetic, and sample relative frequencies.
+    </p>
+    <div class="benchmark-badge-bar">
+      <span class="badge badge-navy">Module 1 Support</span>
+      <span class="badge badge-info">Unlocking the Power of Data (Lock5) Alignment</span>
+      <span class="badge badge-mastery">Target: ≥ 80% Proficiency for Satisfactory (S) Grade</span>
+    </div>
+  </div>
+</header>
+
+<main class="main-wrapper">
+  <!-- Top Mode and Global Stats Bar -->
+  <div class="mode-nav-bar">
+    <div class="mode-selector-group">
+      <button type="button" class="mode-btn active" id="btn-mode-drill" onclick="setPracticeMode('drill')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="m10 15 5-3-5-3v6z"></path>
+        </svg>
+        Focused Drill Mode
+      </button>
+      <button type="button" class="mode-btn" id="btn-mode-set" onclick="setPracticeMode('set')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M9 11l3 3L22 4"></path>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+        </svg>
+        Mixed 5-Problem Practice Set (Warm-Up #1)
+      </button>
+    </div>
+
+    <div class="stats-summary-strip">
+      <div class="stat-pill">
+        <span class="stat-pill-label">Streak:</span>
+        <span class="stat-pill-val streak-highlight" id="stat-streak">0</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-pill-label">Accuracy:</span>
+        <span class="stat-pill-val" id="stat-accuracy">0%</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-pill-label">Solved:</span>
+        <span class="stat-pill-val" id="stat-solved">0/0</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Left Main Column: Active Question Workspace -->
+  <section class="practice-main-column" aria-label="Practice Activity Area">
+    
+    <!-- Mixed Practice Set Progress Bar (Shown in Set Mode) -->
+    <div id="challenge-status-ribbon" class="challenge-ribbon" style="display: none;">
+      <div id="set-step-text">Problem 1 of 5: Decimal Comparisons</div>
+      <div class="step-dots" id="set-dots-container">
+        <div class="step-dot active" id="dot-1">1</div>
+        <div class="step-dot" id="dot-2">2</div>
+        <div class="step-dot" id="dot-3">3</div>
+        <div class="step-dot" id="dot-4">4</div>
+        <div class="step-dot" id="dot-5">5</div>
+      </div>
+    </div>
+
+    <!-- Set Mode Completion Report Container (Shown after 5 questions) -->
+    <div id="set-report-container" style="display: none;" class="report-modal">
+      <div class="report-header">
+        <span class="card-kicker">Practice Assessment Complete</span>
+        <h2 class="report-title">Worksheet #1 Mastery Evaluation</h2>
+        <p id="report-subtitle" style="color: var(--on-surface-variant); font-size: 0.95rem; margin-top: 4px;">
+          Evaluation based on Montgomery College MATH 017 proficiency standard.
+        </p>
+        <div id="report-badge-container">
+          <!-- Filled dynamically: S Grade or Needs Practice -->
+        </div>
+      </div>
+
+      <table class="report-table">
+        <thead>
+          <tr>
+            <th>Skill Topic</th>
+            <th>Question Focus</th>
+            <th>Result</th>
+            <th>Target Mastery</th>
+          </tr>
+        </thead>
+        <tbody id="report-table-body">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+
+      <div style="background-color: var(--surface-container-low); padding: var(--space-md); border-left: var(--inset-rule); margin-bottom: var(--space-md);">
+        <p id="report-pedagogical-advice" style="font-size: 0.9rem; line-height: 1.5;"></p>
+      </div>
+
+      <div class="actions-bar" style="justify-content: center;">
+        <button type="button" class="btn-primary" onclick="startNewSet()">
+          Try Another Mixed 5-Problem Set
+        </button>
+        <button type="button" class="btn-secondary" onclick="setPracticeMode('drill')">
+          Switch to Focused Drill Mode
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Problem Card -->
+    <div class="card" id="active-problem-card">
+      <div class="card-header-row">
+        <div>
+          <span class="card-kicker" id="skill-kicker">Skill 1 • Number Sense</span>
+          <h2 class="card-title" id="skill-title">Decimal Place Value &amp; Inequality Comparisons</h2>
+        </div>
+        <span class="badge badge-info" id="mode-badge">Focused Drill</span>
+      </div>
+
+      <!-- Skill Selection Tabs (Visible in Drill Mode) -->
+      <div class="skill-tab-scroller" id="drill-skill-selector" role="tablist" aria-label="Select Skill">
+        <button type="button" class="skill-tab active" id="tab-skill-1" onclick="selectDrillSkill(1)" role="tab" aria-selected="true">
+          1. Decimal Compare (&lt;, &gt;, =)
+        </button>
+        <button type="button" class="skill-tab" id="tab-skill-2" onclick="selectDrillSkill(2)" role="tab" aria-selected="false">
+          2. Multi-Step Rounding
+        </button>
+        <button type="button" class="skill-tab" id="tab-skill-3" onclick="selectDrillSkill(3)" role="tab" aria-selected="false">
+          3. Small % (&lt; 1%) Conversions
+        </button>
+        <button type="button" class="skill-tab" id="tab-skill-4" onclick="selectDrillSkill(4)" role="tab" aria-selected="false">
+          4. Decimal to % &amp; Misconceptions
+        </button>
+        <button type="button" class="skill-tab" id="tab-skill-5" onclick="selectDrillSkill(5)" role="tab" aria-selected="false">
+          5. Relative Frequency Tables
+        </button>
+      </div>
+
+      <!-- Problem Prompt Box -->
+      <div class="problem-box">
+        <div class="problem-context" id="problem-context-text">Montgomery College Survey Data Context</div>
+        <div class="problem-prompt" id="problem-prompt-text">
+          Compare the two decimal values using &lt;, &gt;, or =.
+        </div>
+        <div id="problem-hero-content">
+          <!-- Dynamic hero or table content inserted here -->
+        </div>
+      </div>
+
+      <!-- Dynamic Interactive Input Area -->
+      <div id="interactive-input-container">
+        <!-- Persistent UI containers for each skill (toggled via display) to ensure static DOM elements -->
+        
+        <!-- Skill 1 UI -->
+        <div id="ui-skill-1" style="display: none; text-align: center; margin-bottom: var(--space-md);">
+          <label class="field-label" style="justify-content: center; margin-bottom: var(--space-sm);">
+            Choose the correct relation:
+          </label>
+          <div class="compare-btn-group" style="justify-content: center;">
+            <button type="button" class="compare-choice-btn" id="btn-choice-lt" onclick="setSkill1Choice('<')" aria-label="Less than">&lt;</button>
+            <button type="button" class="compare-choice-btn" id="btn-choice-eq" onclick="setSkill1Choice('=')" aria-label="Equal to">=</button>
+            <button type="button" class="compare-choice-btn" id="btn-choice-gt" onclick="setSkill1Choice('>')" aria-label="Greater than">&gt;</button>
+          </div>
+          <input type="hidden" id="skill-1-selected-val" value="">
+        </div>
+
+        <!-- Skill 2 UI -->
+        <div id="ui-skill-2" style="display: none;">
+          <div class="input-row">
+            <label for="skill-2-input" class="field-label">
+              <span id="skill-2-label-text">Enter rounded value:</span>
+              <span class="field-hint" id="skill-2-hint-text">e.g. 0.49</span>
+            </label>
+            <div class="input-with-affix">
+              <input type="text" id="skill-2-input" class="text-input" placeholder="Type rounded number..." autocomplete="off">
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill 3 UI -->
+        <div id="ui-skill-3" style="display: none;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-md);">
+            <div class="input-row">
+              <label for="skill-3-dec-input" class="field-label">
+                <span>Part A: Equivalent Decimal</span>
+                <span class="field-hint">e.g. 0.004</span>
+              </label>
+              <div class="input-with-affix">
+                <input type="text" id="skill-3-dec-input" class="text-input" placeholder="0.00..." autocomplete="off">
+              </div>
+            </div>
+
+            <div class="input-row">
+              <label for="skill-3-frac-input" class="field-label">
+                <span>Part B: Simplified Fraction</span>
+                <span class="field-hint">e.g. 1/250</span>
+              </label>
+              <div class="input-with-affix">
+                <input type="text" id="skill-3-frac-input" class="text-input" placeholder="numerator / denominator" autocomplete="off">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill 4 UI -->
+        <div id="ui-skill-4" style="display: none;">
+          <div class="input-row">
+            <label for="skill-4-input" class="field-label">
+              <span>Percentage equivalent (%):</span>
+              <span class="field-hint">Type the number (the % symbol is optional)</span>
+            </label>
+            <div class="input-with-affix">
+              <input type="text" id="skill-4-input" class="text-input" placeholder="e.g. 8.5" autocomplete="off">
+              <div class="affix-box affix-right">%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skill 5 UI -->
+        <div id="ui-skill-5" style="display: none;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-md);">
+            <div class="input-row">
+              <label for="skill-5-dec-input" class="field-label">
+                <span id="skill-5-dec-label">Relative Freq (Decimal):</span>
+                <span class="field-hint" id="skill-5-dec-hint">Rounded to requested place</span>
+              </label>
+              <div class="input-with-affix">
+                <input type="text" id="skill-5-dec-input" class="text-input" placeholder="0.00" autocomplete="off">
+              </div>
+            </div>
+
+            <div class="input-row">
+              <label for="skill-5-pct-input" class="field-label">
+                <span>Relative Freq (%):</span>
+                <span class="field-hint" id="skill-5-pct-hint">e.g. 45%</span>
+              </label>
+              <div class="input-with-affix">
+                <input type="text" id="skill-5-pct-input" class="text-input" placeholder="e.g. 45" autocomplete="off">
+                <div class="affix-box affix-right">%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="actions-bar">
+        <button type="button" class="btn-primary" id="btn-submit-answer" onclick="checkCurrentAnswer()">
+          Check Answer
+        </button>
+        <button type="button" class="btn-secondary" id="btn-next-question" onclick="generateNextQuestion()" style="display: none;">
+          Next Question →
+        </button>
+        <button type="button" class="btn-secondary" id="btn-toggle-place-helper" onclick="togglePlaceValueHelper()">
+          Show Place Value Alignment
+        </button>
+      </div>
+
+      <!-- Place Value Alignment Breakdown Helper Box (Toggleable) -->
+      <div id="place-value-alignment-box" style="display: none; margin-top: var(--space-md); padding: var(--space-sm); background-color: var(--surface-container-low); border: 1px dashed var(--outline-variant);">
+        <p style="font-weight: 700; font-size: 0.85rem; margin-bottom: var(--space-xs); color: var(--primary);">
+          Place Value Alignment Comparison:
+        </p>
+        <div class="place-value-table-wrap">
+          <table class="place-value-table" id="alignment-table">
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Ones</th>
+                <th>.</th>
+                <th>Tenths (1/10)</th>
+                <th>Hundredths (1/100)</th>
+                <th>Thousandths (1/1000)</th>
+                <th>Ten-Thous. (1/10000)</th>
+              </tr>
+            </thead>
+            <tbody id="alignment-table-body">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+        <p id="alignment-note" style="font-size: 0.8rem; color: var(--on-surface-variant);"></p>
+      </div>
+
+      <!-- Feedback & Diagnostic Box -->
+      <div class="feedback-box" id="feedback-panel" role="region" aria-live="polite">
+        <div class="feedback-header" id="feedback-headline">
+          <!-- Status icon and message -->
+        </div>
+        <p id="feedback-message" style="font-size: 0.95rem; margin-bottom: var(--space-xs);"></p>
+
+        <!-- Common Misconception Alert if triggered -->
+        <div id="misconception-panel" class="misconception-callout" style="display: none;">
+          <div class="misconception-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            Diagnostic Trap Analysis
+          </div>
+          <div id="misconception-text"></div>
+        </div>
+
+        <div class="explanation-steps" id="feedback-steps">
+          <strong>Step-by-Step Mathematical Explanation:</strong>
+          <div id="step-by-step-content"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Right Column: Mastery Trackers & Core Student Reference Aids -->
+  <aside class="sidebar-column" aria-label="Mastery and Reference Aids">
+    <!-- Student Progress & Proficiency Dashboard -->
+    <div class="sidebar-card">
+      <div class="sidebar-heading">
+        <span>Skill Mastery (≥80% Target)</span>
+        <button type="button" onclick="resetAllStats()" style="background:none; border:none; font-size:0.75rem; color:var(--on-surface-variant); text-decoration:underline; cursor:pointer;">
+          Reset Stats
+        </button>
+      </div>
+      <p style="font-size: 0.78rem; color: var(--on-surface-variant); margin-bottom: var(--space-sm);">
+        Montgomery College MATH 017 requires an <strong>80% cumulative average</strong> across modules to earn a Satisfactory (S) grade.
+      </p>
+
+      <div class="mastery-progress-list">
+        <div class="mastery-item">
+          <div class="mastery-item-head">
+            <span>1. Decimal Comparisons</span>
+            <span id="skill-1-percent" class="text-mono">0% (0/0)</span>
+          </div>
+          <div class="mastery-bar-track">
+            <div class="target-80-marker" title="80% S-Grade Threshold"></div>
+            <div class="mastery-bar-fill" id="skill-1-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <div class="mastery-item">
+          <div class="mastery-item-head">
+            <span>2. Multi-Step Rounding</span>
+            <span id="skill-2-percent" class="text-mono">0% (0/0)</span>
+          </div>
+          <div class="mastery-bar-track">
+            <div class="target-80-marker" title="80% S-Grade Threshold"></div>
+            <div class="mastery-bar-fill" id="skill-2-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <div class="mastery-item">
+          <div class="mastery-item-head">
+            <span>3. Small % (&lt; 1%) Arithmetic</span>
+            <span id="skill-3-percent" class="text-mono">0% (0/0)</span>
+          </div>
+          <div class="mastery-bar-track">
+            <div class="target-80-marker" title="80% S-Grade Threshold"></div>
+            <div class="mastery-bar-fill" id="skill-3-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <div class="mastery-item">
+          <div class="mastery-item-head">
+            <span>4. Decimal to % Traps</span>
+            <span id="skill-4-percent" class="text-mono">0% (0/0)</span>
+          </div>
+          <div class="mastery-bar-track">
+            <div class="target-80-marker" title="80% S-Grade Threshold"></div>
+            <div class="mastery-bar-fill" id="skill-4-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <div class="mastery-item">
+          <div class="mastery-item-head">
+            <span>5. Relative Frequency</span>
+            <span id="skill-5-percent" class="text-mono">0% (0/0)</span>
+          </div>
+          <div class="mastery-bar-track">
+            <div class="target-80-marker" title="80% S-Grade Threshold"></div>
+            <div class="mastery-bar-fill" id="skill-5-bar" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Reference Aids -->
+    <div class="reference-card">
+      <div class="sidebar-heading" style="border-bottom-color: var(--tertiary);">
+        <span>Worksheet #1 Quick Reference</span>
+      </div>
+
+      <!-- Accordion 1: Place Value Hierarchy -->
+      <button type="button" class="accordion-trigger" onclick="toggleAccordion('ref-pv')">
+        <span>Decimal Place Value Guide</span>
+        <span id="ref-pv-arrow">▼</span>
+      </button>
+      <div id="ref-pv" class="accordion-content open">
+        <p style="margin-bottom: 4px;">Digits to the right of the decimal point represent fractional tenths, hundredths, thousandths:</p>
+        <div class="pv-strip">
+          <div class="pv-strip-cell"><strong>Ones</strong>1</div>
+          <div class="pv-strip-cell"><strong>.</strong>pt</div>
+          <div class="pv-strip-cell"><strong>10ths</strong>0.1</div>
+          <div class="pv-strip-cell"><strong>100ths</strong>0.01</div>
+          <div class="pv-strip-cell"><strong>1000ths</strong>0.001</div>
+          <div class="pv-strip-cell"><strong>10kths</strong>0.0001</div>
+        </div>
+        <p style="font-size: 0.78rem; margin-top: 4px;">
+          <em>Rule:</em> Pad with trailing zeros to make both numbers the same length before comparing! E.g., compare <code>0.450</code> to <code>0.405</code>.
+        </p>
+      </div>
+
+      <!-- Accordion 2: Small Percentages & Decimal Shifts -->
+      <button type="button" class="accordion-trigger" onclick="toggleAccordion('ref-percent')">
+        <span>Small % (&lt; 1%) Rules</span>
+        <span id="ref-percent-arrow">▶</span>
+      </button>
+      <div id="ref-percent" class="accordion-content">
+        <p style="margin-bottom: 4px;"><strong>Percent means per 100:</strong></p>
+        <ul style="padding-left: var(--space-md); margin-bottom: 6px;">
+          <li><strong>% to Decimal:</strong> Divide by 100 (move decimal <strong>2 places LEFT</strong>).</li>
+          <li><strong>Decimal to %:</strong> Multiply by 100% (move decimal <strong>2 places RIGHT</strong>).</li>
+        </ul>
+        <div style="background: #ffffff; padding: 4px 8px; border: 1px solid var(--outline-variant); font-size: 0.75rem;">
+          <code>0.4% = 0.4 ÷ 100 = 0.004</code><br>
+          <code>0.085 × 100% = 8.5%</code> (Not 85%!)
+        </div>
+      </div>
+
+      <!-- Accordion 3: Relative Frequency Formula -->
+      <button type="button" class="accordion-trigger" onclick="toggleAccordion('ref-relfreq')">
+        <span>Relative Frequency Formulas</span>
+        <span id="ref-relfreq-arrow">▶</span>
+      </button>
+      <div id="ref-relfreq" class="accordion-content">
+        <p style="margin-bottom: 4px;">Used in MATH 117 Chapter 2 &amp; 3 to compute sample proportions (&circ;p):</p>
+        <div style="background: #ffffff; padding: 6px; border: 1px solid var(--outline-variant); font-size: 0.78rem; margin-bottom: 4px;">
+          <strong>Relative Frequency</strong> = <span style="display:inline-block; vertical-align:middle; text-align:center;">Category Count (f)<br><span style="border-top:1px solid #000; display:block;">Total Sample Size (N)</span></span>
+        </div>
+        <p style="font-size: 0.75rem;">
+          Always convert the fraction to decimal, round to the requested place value, then multiply by 100% for the percent representation.
+        </p>
+      </div>
+    </div>
+
+    <!-- Campus Academic Support Notice -->
+    <div style="background-color: var(--surface-container-low); border: 1px solid var(--outline-variant); padding: var(--space-sm); font-size: 0.78rem;">
+      <strong style="color: var(--primary); display: block; margin-bottom: 2px;">Ackerman STEM Learning Center:</strong>
+      Drop-in tutoring is available in SC 100 or online via Accudemia for MATH 017 and MATH 117 students. Practice daily to maintain proficiency!
+    </div>
+  </aside>
+</main>
+
+<api-shim></api-shim>
+
+<script>
+// ==========================================
+// STATE MANAGEMENT & PERSISTENCE
+// ==========================================
+const appState = {
+  mode: 'drill', // 'drill' or 'set'
+  currentSkill: 1, // 1 to 5
+  streak: 0,
+  bestStreak: 0,
+  totalAnswered: 0,
+  totalCorrect: 0,
+  skills: {
+    1: { attempted: 0, correct: 0 },
+    2: { attempted: 0, correct: 0 },
+    3: { attempted: 0, correct: 0 },
+    4: { attempted: 0, correct: 0 },
+    5: { attempted: 0, correct: 0 }
+  },
+  // Set mode state
+  setProblemIndex: 0, // 0 to 4
+  setQuestions: [],
+  setAnswers: [],
+  // Current active problem
+  currentProblem: null,
+  answeredCurrent: false
+};
+
+async function loadSavedState() {
+  try {
+    if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === 'function') {
+      const saved = await window.notebookAppApi.getAppState();
+      if (saved && typeof saved === 'object') {
+        if (typeof saved.streak === 'number') appState.streak = saved.streak;
+        if (typeof saved.bestStreak === 'number') appState.bestStreak = saved.bestStreak;
+        if (typeof saved.totalAnswered === 'number') appState.totalAnswered = saved.totalAnswered;
+        if (typeof saved.totalCorrect === 'number') appState.totalCorrect = saved.totalCorrect;
+        if (saved.skills) {
+          for (let i = 1; i <= 5; i++) {
+            if (saved.skills[i]) {
+              appState.skills[i] = {
+                attempted: Number(saved.skills[i].attempted) || 0,
+                correct: Number(saved.skills[i].correct) || 0
+              };
+            }
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('Could not load saved state:', err);
+  }
+}
+
+async function persistCurrentState() {
+  try {
+    if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === 'function') {
+      await window.notebookAppApi.setAppState({
+        streak: appState.streak,
+        bestStreak: appState.bestStreak,
+        totalAnswered: appState.totalAnswered,
+        totalCorrect: appState.totalCorrect,
+        skills: appState.skills
+      });
+    }
+  } catch (err) {
+    console.warn('Could not save state:', err);
+  }
+}
+
+// ==========================================
+// MATH & ALGORITHMIC HELPERS
+// ==========================================
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function getRandomChoice(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function gcd(a, b) {
+  let x = Math.abs(a);
+  let y = Math.abs(b);
+  while (y) {
+    const t = y;
+    y = x % y;
+    x = t;
+  }
+  return x;
+}
+
+// Format decimal to guarantee trailing zeros
+function toFixedString(num, digits) {
+  return num.toFixed(digits);
+}
+
+// ==========================================
+// FIVE CORE SKILL PROBLEM GENERATORS
+// ==========================================
+
+/**
+ * Skill 1: Decimal Place Value & Inequality Comparisons (<, >, =)
+ */
+function generateSkill1Problem() {
+  const archetypes = [
+    // Type A: Same tenths, different hundredths with differing decimal lengths (Classic trap: 0.405 vs 0.45)
+    () => {
+      const tenths = getRandomChoice([2, 3, 4, 5, 6, 7, 8]);
+      const hundredthsDiff = getRandomChoice([1, 2, 3, 4]);
+      const numA = Number(`0.${tenths}0${hundredthsDiff}`); // e.g. 0.405
+      const numB = Number(`0.${tenths}${hundredthsDiff}`);   // e.g. 0.45
+      const swap = Math.random() < 0.5;
+      const v1 = swap ? numB : numA;
+      const v2 = swap ? numA : numB;
+      return {
+        v1Str: v1.toString(),
+        v2Str: v2.toString(),
+        num1: v1,
+        num2: v2,
+        context: 'Comparing sample proportions from two independent Montgomery College survey groups.'
+      };
+    },
+    // Type B: Identical value with trailing zeros (0.60 vs 0.600 or 0.054 vs 0.0540)
+    () => {
+      const baseOptions = ['0.6', '0.45', '0.08', '0.125', '0.054', '0.7'];
+      const chosen = getRandomChoice(baseOptions);
+      const zerosCount = getRandomChoice([1, 2, 3]);
+      const v1Str = chosen;
+      const v2Str = chosen + '0'.repeat(zerosCount);
+      const swap = Math.random() < 0.5;
+      return {
+        v1Str: swap ? v2Str : v1Str,
+        v2Str: swap ? v1Str : v2Str,
+        num1: parseFloat(chosen),
+        num2: parseFloat(chosen),
+        context: 'Checking measurement precision equivalence across standard error calculations.'
+      };
+    },
+    // Type C: Leading zero differences (0.089 vs 0.098 or 0.0078 vs 0.008)
+    () => {
+      const pair = getRandomChoice([
+        { s1: '0.089', s2: '0.098', n1: 0.089, n2: 0.098 },
+        { s1: '0.0078', s2: '0.008', n1: 0.0078, n2: 0.008 },
+        { s1: '0.62', s2: '0.602', n1: 0.62, n2: 0.602 },
+        { s1: '0.6205', s2: '0.62', n1: 0.6205, n2: 0.62 },
+        { s1: '0.0405', s2: '0.045', n1: 0.0405, n2: 0.045 },
+        { s1: '1.045', s2: '1.05', n1: 1.045, n2: 1.05 }
+      ]);
+      const swap = Math.random() < 0.5;
+      return {
+        v1Str: swap ? pair.s2 : pair.s1,
+        v2Str: swap ? pair.s1 : pair.s2,
+        num1: swap ? pair.n2 : pair.n1,
+        num2: swap ? pair.n1 : pair.n2,
+        context: 'Comparing standard errors (SE) computed from Lock5 bootstrap samples.'
+      };
+    }
+  ];
+
+  const problemData = getRandomChoice(archetypes)();
+  let correctSymbol = '=';
+  if (problemData.num1 < problemData.num2) correctSymbol = '<';
+  else if (problemData.num1 > problemData.num2) correctSymbol = '>';
+
+  // Build step-by-step place comparison
+  const s1 = problemData.v1Str;
+  const s2 = problemData.v2Str;
+  const maxDecimals = Math.max(
+    s1.includes('.') ? s1.split('.')[1].length : 0,
+    s2.includes('.') ? s2.split('.')[1].length : 0
+  );
+  const pad1 = s1.includes('.') ? s1 + '0'.repeat(maxDecimals - s1.split('.')[1].length) : s1 + '.' + '0'.repeat(maxDecimals);
+  const pad2 = s2.includes('.') ? s2 + '0'.repeat(maxDecimals - s2.split('.')[1].length) : s2 + '.' + '0'.repeat(maxDecimals);
+
+  return {
+    skillId: 1,
+    skillName: 'Decimal Place Value & Inequality Comparisons',
+    kicker: 'Skill 1 • Number Sense & Place Value',
+    context: problemData.context,
+    prompt: `Compare the two numbers below by selecting the correct inequality or equality symbol:`,
+    v1Str: problemData.v1Str,
+    v2Str: problemData.v2Str,
+    pad1: pad1,
+    pad2: pad2,
+    num1: problemData.num1,
+    num2: problemData.num2,
+    correctSymbol: correctSymbol,
+    explanation: {
+      pad1,
+      pad2,
+      symbol: correctSymbol,
+      v1: problemData.v1Str,
+      v2: problemData.v2Str
+    }
+  };
+}
+
+/**
+ * Skill 2: Multi-Step Decimal Rounding
+ */
+function generateSkill2Problem() {
+  const targetPlaces = [
+    { name: 'tenths', places: 1, label: 'nearest tenth (1 decimal place)' },
+    { name: 'hundredths', places: 2, label: 'nearest hundredth (2 decimal places)' },
+    { name: 'thousandths', places: 3, label: 'nearest thousandth (3 decimal places)' }
+  ];
+  const target = getRandomChoice(targetPlaces);
+
+  // Generate realistic statistical values
+  const contexts = [
+    {
+      story: 'In an Ackerman STEM Learning Center study, a sample proportion calculation yields:',
+      raw: getRandomChoice([0.48563, 0.35189, 0.29411, 0.07142, 0.52187, 0.60834, 0.09841, 0.81972, 0.16667])
+    },
+    {
+      story: 'A standard error computation for a Reese\'s Pieces proportion gives:',
+      raw: getRandomChoice([0.07062, 0.04895, 0.03541, 0.08962, 0.00499, 0.02158, 0.05423])
+    },
+    {
+      story: 'A difference in sample means (x̄₁ − x̄₂) calculation yields:',
+      raw: getRandomChoice([17.1264, 15.9842, 34.8219, 7.4583, 11.1147])
+    }
+  ];
+
+  const contextObj = getRandomChoice(contexts);
+  const rawNum = contextObj.raw;
+  const rawStr = rawNum.toString();
+
+  // Mathematical rounding calculation
+  const factor = Math.pow(10, target.places);
+  const roundedVal = Math.round(rawNum * factor) / factor;
+  const correctRoundedStr = toFixedString(roundedVal, target.places);
+
+  // Identify target digit and decider digit for pedagogical breakdown
+  const dotIndex = rawStr.indexOf('.');
+  const targetDigitIndex = dotIndex + target.places;
+  const deciderIndex = targetDigitIndex + 1;
+  const targetDigit = rawStr.charAt(targetDigitIndex) || '0';
+  const deciderDigit = rawStr.charAt(deciderIndex) || '0';
+  const deciderNum = parseInt(deciderDigit, 10);
+  const isRoundUp = deciderNum >= 5;
+
+  return {
+    skillId: 2,
+    skillName: 'Multi-Step Decimal Rounding',
+    kicker: 'Skill 2 • Operational Precision',
+    context: contextObj.story,
+    prompt: `Round the raw statistical value <strong>${rawStr}</strong> to the <strong>${target.label}</strong>.`,
+    rawNum: rawNum,
+    rawStr: rawStr,
+    target: target,
+    correctRoundedStr: correctRoundedStr,
+    roundedVal: roundedVal,
+    targetDigit: targetDigit,
+    deciderDigit: deciderDigit,
+    isRoundUp: isRoundUp,
+    explanation: {
+      rawStr,
+      targetName: target.name,
+      places: target.places,
+      targetDigit,
+      deciderDigit,
+      isRoundUp,
+      result: correctRoundedStr
+    }
+  };
+}
+
+/**
+ * Skill 3: Small Percentage Conversions (< 1%)
+ */
+function generateSkill3Problem() {
+  const smallPercentages = [
+    { pctStr: '0.4%', pctNum: 0.4, decStr: '0.004', fracNum: 4, fracDen: 1000, simpNum: 1, simpDen: 250 },
+    { pctStr: '0.25%', pctNum: 0.25, decStr: '0.0025', fracNum: 25, fracDen: 10000, simpNum: 1, simpDen: 400 },
+    { pctStr: '0.08%', pctNum: 0.08, decStr: '0.0008', fracNum: 8, fracDen: 10000, simpNum: 1, simpDen: 1250 },
+    { pctStr: '0.75%', pctNum: 0.75, decStr: '0.0075', fracNum: 75, fracDen: 10000, simpNum: 3, simpDen: 400 },
+    { pctStr: '0.05%', pctNum: 0.05, decStr: '0.0005', fracNum: 5, fracDen: 10000, simpNum: 1, simpDen: 2000 },
+    { pctStr: '0.5%', pctNum: 0.5, decStr: '0.005', fracNum: 5, fracDen: 1000, simpNum: 1, simpDen: 200 },
+    { pctStr: '0.12%', pctNum: 0.12, decStr: '0.0012', fracNum: 12, fracDen: 10000, simpNum: 3, simpDen: 2500 },
+    { pctStr: '0.02%', pctNum: 0.02, decStr: '0.0002', fracNum: 2, fracDen: 10000, simpNum: 1, simpDen: 5000 },
+    { pctStr: '0.125%', pctNum: 0.125, decStr: '0.00125', fracNum: 125, fracDen: 100000, simpNum: 1, simpDen: 800 }
+  ];
+
+  const item = getRandomChoice(smallPercentages);
+
+  return {
+    skillId: 3,
+    skillName: 'Small Percentage Conversions (< 1%)',
+    kicker: 'Skill 3 • Proportional Fluency',
+    context: 'In statistical significance tests and rare event probabilities, percentages are often smaller than 1%.',
+    prompt: `Convert the small percentage <strong>${item.pctStr}</strong> into its equivalent <strong>decimal</strong> and <strong>simplified fraction</strong>.`,
+    item: item,
+    correctDec: item.decStr,
+    correctFractionStr: `${item.simpNum}/${item.simpDen}`,
+    explanation: item
+  };
+}
+
+/**
+ * Skill 4: Decimal to Percentage Conversions & Misconceptions
+ */
+function generateSkill4Problem() {
+  const decimalsPool = [
+    {
+      decStr: '0.085',
+      pctStr: '8.5%',
+      pctNum: 8.5,
+      trapAnswers: ['85', '85%', '0.85', '0.85%'],
+      trapDiagnoses: {
+        '85': 'You multiplied by 1000 or ignored the leading zero in the tenths place. 0.85 = 85%, so 0.085 is 8.5%.',
+        '85%': 'Remember that 0.85 = 85%. Since 0.085 has a zero in the tenths place, moving the decimal 2 places gives 8.5%.',
+        '0.85': 'You only multiplied by 10 or moved the decimal point 1 place right instead of 2.',
+        '0.85%': 'Moving 2 places right lands after the 8, resulting in 8.5%, not 0.85%.'
+      }
+    },
+    {
+      decStr: '0.04',
+      pctStr: '4%',
+      pctNum: 4,
+      trapAnswers: ['40', '40%', '0.4', '0.4%'],
+      trapDiagnoses: {
+        '40': '0.4 = 40%. The decimal 0.04 represents 4 hundredths, which is 4%.',
+        '40%': '0.4 = 40%. The decimal 0.04 has 0 in the tenths place, so 0.04 × 100% = 4%.',
+        '0.4': 'You divided instead of multiplying by 100%.',
+        '0.4%': '0.04 × 100 = 4, not 0.4.'
+      }
+    },
+    {
+      decStr: '0.0035',
+      pctStr: '0.35%',
+      pctNum: 0.35,
+      trapAnswers: ['3.5', '3.5%', '35', '35%'],
+      trapDiagnoses: {
+        '3.5': '3.5% would correspond to 0.035. Moving the decimal point 2 places right gives 0.35%.',
+        '3.5%': '0.035 = 3.5%. With two leading zeros (0.0035), shifting 2 places right gives 0.35%.',
+        '35': '35% is equal to 0.35, not 0.0035.'
+      }
+    },
+    {
+      decStr: '0.105',
+      pctStr: '10.5%',
+      pctNum: 10.5,
+      trapAnswers: ['1.05', '1.05%', '105', '105%'],
+      trapDiagnoses: {
+        '1.05': 'You shifted only 1 place. Moving two decimal places to the right gives 10.5%.',
+        '105': '105% is equal to 1.05.'
+      }
+    },
+    {
+      decStr: '0.07',
+      pctStr: '7%',
+      pctNum: 7,
+      trapAnswers: ['70', '70%', '0.7', '0.7%'],
+      trapDiagnoses: {
+        '70': '0.7 = 70%. Here we have 0.07, which is 7 hundredths = 7%.',
+        '70%': '0.7 = 70%. Moving the decimal 2 places in 0.07 gives 7%.'
+      }
+    },
+    {
+      decStr: '1.07',
+      pctStr: '107%',
+      pctNum: 107,
+      trapAnswers: ['10.7', '10.7%', '1.07', '1.07%'],
+      trapDiagnoses: {
+        '10.7': 'Moving two decimal places right on 1.07 gives 107%, not 10.7%.'
+      }
+    },
+    {
+      decStr: '0.375',
+      pctStr: '37.5%',
+      pctNum: 37.5,
+      trapAnswers: ['3.75', '3.75%', '375', '375%'],
+      trapDiagnoses: {
+        '3.75': 'Moving two places right moves the decimal past the 3 and 7 to give 37.5%.'
+      }
+    }
+  ];
+
+  const item = getRandomChoice(decimalsPool);
+
+  return {
+    skillId: 4,
+    skillName: 'Decimal to Percentage Conversions & Misconceptions',
+    kicker: 'Skill 4 • Diagnostic Conversion',
+    context: 'Converting sample proportions (p-hat) to percentages without falling into common place-value traps.',
+    prompt: `Convert the decimal value <strong>${item.decStr}</strong> to a <strong>percentage</strong>:`,
+    item: item,
+    correctPctNum: item.pctNum,
+    correctPctStr: item.pctStr,
+    explanation: item
+  };
+}
+
+/**
+ * Skill 5: Computing Relative Frequency from Count Tables
+ */
+function generateSkill5Problem() {
+  const scenarios = [
+    {
+      title: 'Montgomery College Tutoring Format Survey',
+      story: 'A random sample of MATH 017 & 117 students were surveyed regarding their preferred tutoring format at the Rockville campus:',
+      categories: [
+        { label: 'Ackerman In-Person Center', count: 18 },
+        { label: 'Virtual Zoom Tutoring', count: 14 },
+        { label: 'Peer Study Groups', count: 6 },
+        { label: 'Did Not Use Tutoring', count: 2 }
+      ],
+      targetCategoryIndex: 0, // In-person (18/40)
+      roundPlaces: 2
+    },
+    {
+      title: 'Campus Commute Method Survey',
+      story: 'Data collected on transportation methods used by Montgomery College students:',
+      categories: [
+        { label: 'Public Transit (Metro / RideOn)', count: 21 },
+        { label: 'Drive Alone', count: 39 },
+        { label: 'Carpool', count: 9 },
+        { label: 'Walk / Bicycle', count: 6 }
+      ],
+      targetCategoryIndex: 0, // Public Transit (21/75)
+      roundPlaces: 2
+    },
+    {
+      title: 'Reese\'s Pieces Random Sample (Lock5 Chapter 3)',
+      story: 'A bag of Reese\'s Pieces is opened to simulate the sampling distribution of orange candies:',
+      categories: [
+        { label: 'Orange Candies', count: 26 },
+        { label: 'Yellow Candies', count: 14 },
+        { label: 'Brown Candies', count: 10 }
+      ],
+      targetCategoryIndex: 0, // Orange (26/50)
+      roundPlaces: 2
+    },
+    {
+      title: 'Statistics Textbook Format Preference',
+      story: 'Students in MATH 117 indicated which textbook option they selected for WileyPlus:',
+      categories: [
+        { label: 'E-Textbook on WileyPlus', count: 48 },
+        { label: 'Loose-Leaf Print Combo', count: 16 },
+        { label: 'Library Reserve Copy', count: 12 },
+        { label: 'Used Hardcover', count: 4 }
+      ],
+      targetCategoryIndex: 0, // E-Text (48/80)
+      roundPlaces: 2
+    },
+    {
+      title: 'Student Online Learning Resource Preference',
+      story: 'Survey of online tools most frequently used by introductory statistics students:',
+      categories: [
+        { label: 'StatKey Web Applets', count: 35 },
+        { label: 'Desmos Scientific Calculator', count: 25 },
+        { label: 'TI-84 Graphing Calculator', count: 15 },
+        { label: 'Larry Green Applets', count: 5 }
+      ],
+      targetCategoryIndex: 1, // Desmos (25/80)
+      roundPlaces: 3
+    }
+  ];
+
+  const sc = getRandomChoice(scenarios);
+  const totalN = sc.categories.reduce((acc, c) => acc + c.count, 0);
+  const targetCategory = sc.categories[sc.targetCategoryIndex];
+  const targetCount = targetCategory.count;
+
+  const rawRatio = targetCount / totalN;
+  const roundedDecStr = toFixedString(rawRatio, sc.roundPlaces);
+  const roundedPercentStr = (rawRatio * 100).toFixed(sc.roundPlaces === 3 ? 1 : 0) + '%';
+  const simplifiedGcd = gcd(targetCount, totalN);
+  const simpNum = targetCount / simplifiedGcd;
+  const simpDen = totalN / simplifiedGcd;
+
+  return {
+    skillId: 5,
+    skillName: 'Computing Relative Frequency from Count Tables',
+    kicker: 'Skill 5 • Statistical Data Readiness',
+    context: sc.story,
+    prompt: `From the frequency table below, calculate the <strong>relative frequency</strong> of <strong>"${targetCategory.label}"</strong> as a fraction, as a decimal rounded to the nearest ${sc.roundPlaces === 2 ? 'hundredth (2 decimal places)' : 'thousandth (3 decimal places)'}, and as a percent.`,
+    scenario: sc,
+    targetCategory: targetCategory,
+    totalN: totalN,
+    targetCount: targetCount,
+    simpNum: simpNum,
+    simpDen: simpDen,
+    roundedDecStr: roundedDecStr,
+    roundedPercentStr: roundedPercentStr,
+    roundPlaces: sc.roundPlaces,
+    explanation: {
+      targetName: targetCategory.label,
+      targetCount,
+      totalN,
+      simpNum,
+      simpDen,
+      roundedDecStr,
+      roundedPercentStr
+    }
+  };
+}
+
+// ==========================================
+// RENDERERS FOR PROBLEM TYPES
+// ==========================================
+
+function renderCurrentProblem() {
+  const p = appState.currentProblem;
+  if (!p) return;
+
+  appState.answeredCurrent = false;
+
+  // Header kicker & title
+  const kickerEl = document.getElementById('skill-kicker');
+  const titleEl = document.getElementById('skill-title');
+  const modeBadgeEl = document.getElementById('mode-badge');
+  const contextEl = document.getElementById('problem-context-text');
+  const promptEl = document.getElementById('problem-prompt-text');
+  const heroEl = document.getElementById('problem-hero-content');
+  const inputContainer = document.getElementById('interactive-input-container');
+  const feedbackPanel = document.getElementById('feedback-panel');
+  const placeValueBox = document.getElementById('place-value-alignment-box');
+
+  if (kickerEl) kickerEl.textContent = p.kicker;
+  if (titleEl) titleEl.textContent = p.skillName;
+  if (modeBadgeEl) modeBadgeEl.textContent = appState.mode === 'drill' ? 'Focused Drill' : `Set Item ${appState.setProblemIndex + 1} of 5`;
+  if (contextEl) contextEl.innerHTML = p.context;
+  if (promptEl) promptEl.innerHTML = p.prompt;
+
+  // Reset feedback & helpers
+  if (feedbackPanel) {
+    feedbackPanel.className = 'feedback-box';
+    feedbackPanel.style.display = 'none';
+  }
+  if (placeValueBox) placeValueBox.style.display = 'none';
+
+  // Toggle action buttons
+  const submitBtn = document.getElementById('btn-submit-answer');
+  const nextBtn = document.getElementById('btn-next-question');
+  if (submitBtn) submitBtn.style.display = 'inline-flex';
+  if (nextBtn) nextBtn.style.display = 'none';
+
+  // Clear Hero & Input
+  if (heroEl) heroEl.innerHTML = '';
+  if (inputContainer) inputContainer.innerHTML = '';
+
+  // Render based on Skill ID
+  if (p.skillId === 1) {
+    renderSkill1UI(p, heroEl, inputContainer);
+  } else if (p.skillId === 2) {
+    renderSkill2UI(p, heroEl, inputContainer);
+  } else if (p.skillId === 3) {
+    renderSkill3UI(p, heroEl, inputContainer);
+  } else if (p.skillId === 4) {
+    renderSkill4UI(p, heroEl, inputContainer);
+  } else if (p.skillId === 5) {
+    renderSkill5UI(p, heroEl, inputContainer);
+  }
+
+  // Pre-fill alignment table for helper
+  setupAlignmentTable(p);
+}
+
+function renderSkill1UI(p, heroEl, inputContainer) {
+  heroEl.innerHTML = `
+    <div class="comparison-layout">
+      <div class="compare-num-box">${p.v1Str}</div>
+      <div style="font-size: 1.5rem; font-weight: 800; color: var(--tertiary);">?</div>
+      <div class="compare-num-box">${p.v2Str}</div>
+    </div>
+  `;
+
+  inputContainer.innerHTML = `
+    <div style="text-align: center; margin-bottom: var(--space-md);">
+      <label class="field-label" style="justify-content: center; margin-bottom: var(--space-sm);">
+        Choose the correct relation:
+      </label>
+      <div class="compare-btn-group" style="justify-content: center;">
+        <button type="button" class="compare-choice-btn" id="btn-choice-lt" onclick="setSkill1Choice('<')" aria-label="Less than">&lt;</button>
+        <button type="button" class="compare-choice-btn" id="btn-choice-eq" onclick="setSkill1Choice('=')" aria-label="Equal to">=</button>
+        <button type="button" class="compare-choice-btn" id="btn-choice-gt" onclick="setSkill1Choice('>')" aria-label="Greater than">&gt;</button>
+      </div>
+      <input type="hidden" id="skill-1-selected-val" value="">
+    </div>
+  `;
+}
+
+let selectedSkill1Symbol = null;
+function setSkill1Choice(sym) {
+  selectedSkill1Symbol = sym;
+  const inputEl = document.getElementById('skill-1-selected-val');
+  if (inputEl) inputEl.value = sym;
+
+  const btnLt = document.getElementById('btn-choice-lt');
+  const btnEq = document.getElementById('btn-choice-eq');
+  const btnGt = document.getElementById('btn-choice-gt');
+
+  if (btnLt) btnLt.classList.remove('selected');
+  if (btnEq) btnEq.classList.remove('selected');
+  if (btnGt) btnGt.classList.remove('selected');
+
+  if (sym === '<' && btnLt) btnLt.classList.add('selected');
+  if (sym === '=' && btnEq) btnEq.classList.add('selected');
+  if (sym === '>' && btnGt) btnGt.classList.add('selected');
+}
+
+function renderSkill2UI(p, heroEl, inputContainer) {
+  heroEl.innerHTML = `
+    <div class="number-display-hero">
+      <span>Value:</span>
+      <span style="background:#ffffff; border:2px solid var(--outline); padding:4px 12px; font-variant-numeric:tabular-nums;">
+        ${p.rawStr}
+      </span>
+    </div>
+  `;
+
+  inputContainer.innerHTML = `
+    <div class="input-row">
+      <label for="skill-2-input" class="field-label">
+        <span>Enter rounded value to the ${p.target.name}:</span>
+        <span class="field-hint">e.g. ${p.target.places === 1 ? '0.5' : (p.target.places === 2 ? '0.49' : '0.486')}</span>
+      </label>
+      <div class="input-with-affix">
+        <input type="text" id="skill-2-input" class="text-input" placeholder="Type rounded number..." autocomplete="off">
+      </div>
+    </div>
+  `;
+
+  // Auto focus input
+  setTimeout(() => {
+    const inp = document.getElementById('skill-2-input');
+    if (inp) inp.focus();
+  }, 50);
+}
+
+function renderSkill3UI(p, heroEl, inputContainer) {
+  heroEl.innerHTML = `
+    <div class="number-display-hero">
+      <span>Percentage:</span>
+      <span style="background:#ffffff; border:2px solid var(--outline); padding:4px 14px; color: var(--error);">
+        ${p.item.pctStr}
+      </span>
+    </div>
+  `;
+
+  inputContainer.innerHTML = `
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-md);">
+      <div class="input-row">
+        <label for="skill-3-dec-input" class="field-label">
+          <span>Part A: Equivalent Decimal</span>
+          <span class="field-hint">e.g. 0.004</span>
+        </label>
+        <div class="input-with-affix">
+          <input type="text" id="skill-3-dec-input" class="text-input" placeholder="0.00..." autocomplete="off">
+        </div>
+      </div>
+
+      <div class="input-row">
+        <label for="skill-3-frac-input" class="field-label">
+          <span>Part B: Simplified Fraction</span>
+          <span class="field-hint">e.g. 1/250</span>
+        </label>
+        <div class="input-with-affix">
+          <input type="text" id="skill-3-frac-input" class="text-input" placeholder="numerator / denominator" autocomplete="off">
+        </div>
+      </div>
+    </div>
+  `;
+
+  setTimeout(() => {
+    const inp = document.getElementById('skill-3-dec-input');
+    if (inp) inp.focus();
+  }, 50);
+}
+
+function renderSkill4UI(p, heroEl, inputContainer) {
+  heroEl.innerHTML = `
+    <div class="number-display-hero">
+      <span>Decimal:</span>
+      <span style="background:#ffffff; border:2px solid var(--outline); padding:4px 14px; color: var(--tertiary);">
+        ${p.item.decStr}
+      </span>
+    </div>
+  `;
+
+  inputContainer.innerHTML = `
+    <div class="input-row">
+      <label for="skill-4-input" class="field-label">
+        <span>Percentage equivalent (%):</span>
+        <span class="field-hint">Type the number (the % symbol is optional)</span>
+      </label>
+      <div class="input-with-affix">
+        <input type="text" id="skill-4-input" class="text-input" placeholder="e.g. 8.5" autocomplete="off">
+        <div class="affix-box affix-right">%</div>
+      </div>
+    </div>
+  `;
+
+  setTimeout(() => {
+    const inp = document.getElementById('skill-4-input');
+    if (inp) inp.focus();
+  }, 50);
+}
+
+function renderSkill5UI(p, heroEl, inputContainer) {
+  let rowsHtml = '';
+  p.scenario.categories.forEach((cat, idx) => {
+    const isTarget = idx === p.scenario.targetCategoryIndex;
+    rowsHtml += `
+      <tr class="${isTarget ? 'highlight-target' : ''}">
+        <td>${cat.label} ${isTarget ? '<strong>(Target)</strong>' : ''}</td>
+        <td style="text-align: right;">${cat.count}</td>
+      </tr>
+    `;
+  });
+
+  heroEl.innerHTML = `
+    <table class="stat-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th style="text-align: right;">Frequency (Count)</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rowsHtml}
+        <tr class="total-row">
+          <td>Total Sample Size (N)</td>
+          <td style="text-align: right;">${p.totalN}</td>
+        </tr>
+      </tbody>
+    </table>
+  `;
+
+  inputContainer.innerHTML = `
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-md);">
+      <div class="input-row">
+        <label for="skill-5-dec-input" class="field-label">
+          <span>Relative Freq (Decimal):</span>
+          <span class="field-hint">Rounded to ${p.roundPlaces === 2 ? 'hundredths' : 'thousandths'}</span>
+        </label>
+        <div class="input-with-affix">
+          <input type="text" id="skill-5-dec-input" class="text-input" placeholder="e.g. ${p.roundPlaces === 2 ? '0.45' : '0.313'}" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="input-row">
+        <label for="skill-5-pct-input" class="field-label">
+          <span>Relative Freq (%):</span>
+          <span class="field-hint">e.g. ${p.roundedPercentStr}</span>
+        </label>
+        <div class="input-with-affix">
+          <input type="text" id="skill-5-pct-input" class="text-input" placeholder="e.g. 45" autocomplete="off">
+          <div class="affix-box affix-right">%</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  setTimeout(() => {
+    const inp = document.getElementById('skill-5-dec-input');
+    if (inp) inp.focus();
+  }, 50);
+}
+
+// Setup place value alignment table
+function setupAlignmentTable(p) {
+  const tableBody = document.getElementById('alignment-table-body');
+  const noteEl = document.getElementById('alignment-note');
+  if (!tableBody) return;
+
+  if (p.skillId === 1) {
+    const d1 = padDigits(p.pad1);
+    const d2 = padDigits(p.pad2);
+
+    tableBody.innerHTML = `
+      <tr>
+        <td><strong>${p.v1Str}</strong></td>
+        <td>${d1.ones}</td>
+        <td>.</td>
+        <td class="${d1.tenths !== d2.tenths ? 'pv-diff' : ''}">${d1.tenths}</td>
+        <td class="${d1.hundredths !== d2.hundredths ? 'pv-diff' : ''}">${d1.hundredths}</td>
+        <td class="${d1.thousandths !== d2.thousandths ? 'pv-diff' : ''}">${d1.thousandths}</td>
+        <td class="${d1.tenthous !== d2.tenthous ? 'pv-diff' : ''}">${d1.tenthous}</td>
+      </tr>
+      <tr>
+        <td><strong>${p.v2Str}</strong></td>
+        <td>${d2.ones}</td>
+        <td>.</td>
+        <td class="${d1.tenths !== d2.tenths ? 'pv-diff' : ''}">${d2.tenths}</td>
+        <td class="${d1.hundredths !== d2.hundredths ? 'pv-diff' : ''}">${d2.hundredths}</td>
+        <td class="${d1.thousandths !== d2.thousandths ? 'pv-diff' : ''}">${d2.thousandths}</td>
+        <td class="${d1.tenthous !== d2.tenthous ? 'pv-diff' : ''}">${d2.tenthous}</td>
+      </tr>
+    `;
+    if (noteEl) {
+      noteEl.innerHTML = `Compare columns from left to right. The first place value where digits differ determines which decimal is larger. Notice that <strong>${p.pad1}</strong> and <strong>${p.pad2}</strong> are padded to equal lengths.`;
+    }
+  } else if (p.skillId === 2) {
+    const d = padDigits(p.rawStr);
+    tableBody.innerHTML = `
+      <tr>
+        <td><strong>Raw: ${p.rawStr}</strong></td>
+        <td>${d.ones}</td>
+        <td>.</td>
+        <td class="${p.target.places === 1 ? 'pv-highlight' : ''}">${d.tenths}</td>
+        <td class="${p.target.places === 2 ? 'pv-highlight' : ''}">${d.hundredths}</td>
+        <td class="${p.target.places === 3 ? 'pv-highlight' : ''}">${d.thousandths}</td>
+        <td>${d.tenthous}</td>
+      </tr>
+    `;
+    if (noteEl) {
+      noteEl.innerHTML = `Target place is <strong>${p.target.name}</strong> (highlighted in yellow). Look at the digit immediately to its right (decider) to decide whether to round up.`;
+    }
+  } else {
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="7">Place value table applies primarily to decimal comparisons and multi-step rounding.</td>
+      </tr>
+    `;
+    if (noteEl) noteEl.innerHTML = '';
+  }
+}
+
+function padDigits(str) {
+  const parts = str.toString().split('.');
+  const intPart = parts[0] || '0';
+  const decPart = parts[1] || '';
+  return {
+    ones: intPart,
+    tenths: decPart.charAt(0) || '0',
+    hundredths: decPart.charAt(1) || '0',
+    thousandths: decPart.charAt(2) || '0',
+    tenthous: decPart.charAt(3) || '0'
+  };
+}
+
+function togglePlaceValueHelper() {
+  const box = document.getElementById('place-value-alignment-box');
+  const btn = document.getElementById('btn-toggle-place-helper');
+  if (!box || !btn) return;
+  if (box.style.display === 'none') {
+    box.style.display = 'block';
+    btn.textContent = 'Hide Place Value Alignment';
+  } else {
+    box.style.display = 'none';
+    btn.textContent = 'Show Place Value Alignment';
+  }
+}
+
+// ==========================================
+// ANSWER EVALUATION & DIAGNOSTICS
+// ==========================================
+
+function checkCurrentAnswer() {
+  if (appState.answeredCurrent) return;
+
+  const p = appState.currentProblem;
+  if (!p) return;
+
+  let isCorrect = false;
+  let userEntered = '';
+  let misconceptionMsg = null;
+  let stepExplanation = '';
+
+  if (p.skillId === 1) {
+    const selected = selectedSkill1Symbol;
+    if (!selected) {
+      alert('Please select <, =, or > before checking your answer.');
+      return;
+    }
+    userEntered = selected;
+    isCorrect = (selected === p.correctSymbol);
+
+    // Misconception check: Integer trap
+    if (!isCorrect) {
+      const v1WithoutDec = parseInt(p.v1Str.replace('.', ''), 10);
+      const v2WithoutDec = parseInt(p.v2Str.replace('.', ''), 10);
+      if ((v1WithoutDec > v2WithoutDec && selected === '>') || (v1WithoutDec < v2WithoutDec && selected === '<')) {
+        misconceptionMsg = `<strong>Integer Bias Trap:</strong> You evaluated the numbers as if they were whole integers (${v1WithoutDec} vs ${v2WithoutDec}). In decimals, the number with more digits is NOT automatically larger! Align them with trailing zeros: <code>${p.pad1}</code> vs <code>${p.pad2}</code>.`;
+      }
+    }
+
+    stepExplanation = `
+      <ol>
+        <li><strong>Align by decimal point and pad with trailing zeros:</strong><br>
+          Number 1: <code>${p.pad1}</code><br>
+          Number 2: <code>${p.pad2}</code>
+        </li>
+        <li><strong>Compare place values from left to right:</strong><br>
+          Both values have <code>${p.pad1.split('.')[0]}</code> in the ones place.
+          Compare the tenths, then hundredths, then thousandths.
+        </li>
+        <li><strong>Conclusion:</strong> Since <code>${p.pad1}</code> is ${p.correctSymbol === '<' ? 'less than' : (p.correctSymbol === '>' ? 'greater than' : 'equal to')} <code>${p.pad2}</code>, the correct relationship is <strong>${p.v1Str} ${p.correctSymbol} ${p.v2Str}</strong>.</li>
+      </ol>
+    `;
+  } else if (p.skillId === 2) {
+    const inputEl = document.getElementById('skill-2-input');
+    if (!inputEl || inputEl.value.trim() === '') {
+      alert('Please enter your rounded answer.');
+      return;
+    }
+    userEntered = inputEl.value.trim();
+    const cleanUser = userEntered.replace(/,/g, '');
+    const userNum = parseFloat(cleanUser);
+
+    // Check exact string representation (to enforce trailing zero precision when needed) or float match
+    const matchesNumber = !isNaN(userNum) && Math.abs(userNum - p.roundedVal) < 0.0001;
+    // Check if user dropped a critical trailing zero (e.g. entered 0.5 instead of 0.50 for hundredths)
+    const trailingZeroDropped = (p.correctRoundedStr.endsWith('0') && cleanUser === parseFloat(p.correctRoundedStr).toString() && cleanUser !== p.correctRoundedStr);
+
+    if (matchesNumber && !trailingZeroDropped) {
+      isCorrect = true;
+    } else {
+      isCorrect = false;
+      if (trailingZeroDropped) {
+        misconceptionMsg = `<strong>Statistical Precision Notice:</strong> In statistics, when rounding to the <em>${p.target.name}</em>, you must keep trailing zeros to indicate precision! Write <strong>${p.correctRoundedStr}</strong> rather than ${cleanUser}.`;
+      } else if (!isNaN(userNum) && Math.abs(userNum - parseFloat(p.rawStr)) < 0.0001) {
+        misconceptionMsg = `<strong>Did you round?</strong> You entered the unrounded raw value. You must round to ${p.target.places} decimal place(s).`;
+      } else {
+        misconceptionMsg = `<strong>Rounding Rule Check:</strong> Look at the decider digit (the digit at position ${p.target.places + 1}). If it is 5 or greater, add 1 to the target place. Otherwise, leave it unchanged.`;
+      }
+    }
+
+    stepExplanation = `
+      <ol>
+        <li><strong>Locate target place value:</strong> Rounding to <em>${p.target.name}</em> (${p.target.places} decimal place${p.target.places > 1 ? 's' : ''}). Target digit is <code>${p.targetDigit}</code>.</li>
+        <li><strong>Examine the deciding digit immediately to the right:</strong> The next digit is <code>${p.deciderDigit}</code>.</li>
+        <li><strong>Apply rounding rule:</strong> Since ${p.deciderDigit} is ${p.isRoundUp ? '≥ 5' : '< 5'}, we ${p.isRoundUp ? 'round UP (add 1 to the target digit)' : 'keep the target digit unchanged'}.</li>
+        <li><strong>Final rounded value:</strong> <strong>${p.correctRoundedStr}</strong>.</li>
+      </ol>
+    `;
+  } else if (p.skillId === 3) {
+    const decInput = document.getElementById('skill-3-dec-input');
+    const fracInput = document.getElementById('skill-3-frac-input');
+    if (!decInput || !fracInput || decInput.value.trim() === '' || fracInput.value.trim() === '') {
+      alert('Please enter both the decimal and the fraction.');
+      return;
+    }
+    const userDec = decInput.value.trim().replace(/,/g, '');
+    const userFrac = fracInput.value.trim().replace(/\s/g, '');
+
+    const correctDecNum = parseFloat(p.correctDec);
+    const userDecNum = parseFloat(userDec);
+    const decMatches = !isNaN(userDecNum) && Math.abs(userDecNum - correctDecNum) < 0.000001;
+
+    // Check fraction
+    let fracMatches = false;
+    if (userFrac.includes('/')) {
+      const parts = userFrac.split('/');
+      const num = parseInt(parts[0], 10);
+      const den = parseInt(parts[1], 10);
+      if (!isNaN(num) && !isNaN(den) && den !== 0) {
+        // Must be simplified to lowest terms
+        if (num === p.item.simpNum && den === p.item.simpDen) {
+          fracMatches = true;
+        } else if (Math.abs((num / den) - correctDecNum) < 0.000001) {
+          misconceptionMsg = `<strong>Fraction Simplification Required:</strong> ${num}/${den} is equal in value, but is not fully simplified! Divide numerator and denominator by their greatest common factor to get <strong>${p.item.simpNum}/${p.item.simpDen}</strong>.`;
+        }
+      }
+    }
+
+    isCorrect = decMatches && fracMatches;
+
+    if (!decMatches) {
+      // Check common trap
+      if (Math.abs(userDecNum - (p.item.pctNum / 10)) < 0.00001) {
+        misconceptionMsg = `<strong>Decimal Shift Trap:</strong> You only divided by 10 (shifted 1 place left)! Remember that percent (%) means per 100, so you must divide by 100 (shift <strong>2 places LEFT</strong>): ${p.item.pctStr} → <strong>${p.correctDec}</strong>.`;
+      } else if (Math.abs(userDecNum - p.item.pctNum) < 0.00001) {
+        misconceptionMsg = `<strong>Forgot to Convert:</strong> You typed ${userDec}, which is ${p.item.pctNum * 100}%, not ${p.item.pctStr}. You must divide by 100!`;
+      }
+    }
+
+    stepExplanation = `
+      <ol>
+        <li><strong>Convert % to Decimal (Divide by 100):</strong><br>
+          <code>${p.item.pctStr} = ${p.item.pctNum} ÷ 100 = ${p.correctDec}</code><br>
+          <em>Visual rule:</em> Move the decimal point 2 places to the left: <code>0.${p.item.pctNum.toString().split('.')[1] || ''} → ${p.correctDec}</code>.
+        </li>
+        <li><strong>Convert to Fraction:</strong><br>
+          Write as a ratio over 100: <code>${p.item.pctNum} / 100 = ${p.item.fracNum} / ${p.item.fracDen}</code>.
+        </li>
+        <li><strong>Simplify to Lowest Terms:</strong><br>
+          Divide numerator and denominator by their GCD: <code>${p.item.fracNum} ÷ ${p.item.fracNum / p.item.simpNum} = ${p.item.simpNum}</code> and <code>${p.item.fracDen} ÷ ${p.item.fracNum / p.item.simpNum} = ${p.item.simpDen}</code>.<br>
+          Simplified Fraction: <strong>${p.item.simpNum}/${p.item.simpDen}</strong>.
+        </li>
+      </ol>
+    `;
+  } else if (p.skillId === 4) {
+    const inputEl = document.getElementById('skill-4-input');
+    if (!inputEl || inputEl.value.trim() === '') {
+      alert('Please enter your percentage answer.');
+      return;
+    }
+    userEntered = inputEl.value.trim().replace('%', '').trim();
+    const userVal = parseFloat(userEntered);
+
+    isCorrect = !isNaN(userVal) && Math.abs(userVal - p.correctPctNum) < 0.001;
+
+    if (!isCorrect) {
+      // Check trap diagnosis map
+      if (p.item.trapDiagnoses[userEntered] || p.item.trapDiagnoses[inputEl.value.trim()]) {
+        misconceptionMsg = `<strong>Diagnostic Alert:</strong> ${p.item.trapDiagnoses[userEntered] || p.item.trapDiagnoses[inputEl.value.trim()]}`;
+      } else if (userVal === p.correctPctNum * 10) {
+        misconceptionMsg = `<strong>Over-shifted Decimal:</strong> You multiplied by 1000 instead of 100. Shifting two places right on <code>${p.item.decStr}</code> gives <strong>${p.correctPctStr}</strong>.`;
+      } else {
+        misconceptionMsg = `<strong>Conversion Reminder:</strong> To convert a decimal to a percent, multiply by 100% (shift the decimal point <strong>2 places to the RIGHT</strong>).`;
+      }
+    }
+
+    stepExplanation = `
+      <ol>
+        <li><strong>Rule for Decimal to Percentage:</strong> Multiply the decimal by 100% (move the decimal point 2 places to the right).</li>
+        <li><strong>Execute the shift:</strong><br>
+          Starting at <code>${p.item.decStr}</code>:<br>
+          Shift 1 place right → <code>${(parseFloat(p.item.decStr) * 10).toFixed(4).replace(/0+$/, '').replace(/\.$/, '')}</code><br>
+          Shift 2 places right → <strong>${p.correctPctStr}</strong>.
+        </li>
+        <li><strong>Check magnitude:</strong> ${p.item.decStr} is between 0 and 1, so the percentage must be <strong>${p.correctPctStr}</strong> (NOT a whole number like ${p.item.pctNum * 10}%).</li>
+      </ol>
+    `;
+  } else if (p.skillId === 5) {
+    const decInput = document.getElementById('skill-5-dec-input');
+    const pctInput = document.getElementById('skill-5-pct-input');
+    if (!decInput || !pctInput || decInput.value.trim() === '' || pctInput.value.trim() === '') {
+      alert('Please enter both the decimal and percentage values.');
+      return;
+    }
+    const userDecStr = decInput.value.trim().replace(/,/g, '');
+    const userPctStr = pctInput.value.trim().replace('%', '').trim();
+
+    const userDecNum = parseFloat(userDecStr);
+    const correctDecNum = parseFloat(p.roundedDecStr);
+    const userPctNum = parseFloat(userPctStr);
+    const correctPctNum = parseFloat(p.roundedPercentStr.replace('%', ''));
+
+    const decOk = !isNaN(userDecNum) && Math.abs(userDecNum - correctDecNum) < 0.002;
+    const pctOk = !isNaN(userPctNum) && Math.abs(userPctNum - correctPctNum) < 0.2;
+
+    isCorrect = decOk && pctOk;
+
+    if (!isCorrect) {
+      if (!decOk && !pctOk) {
+        misconceptionMsg = `<strong>Relative Frequency Calculation:</strong> Divide category count (${p.targetCount}) by total count (${p.totalN}): <code>${p.targetCount} / ${p.totalN}</code>.`;
+      } else if (!decOk) {
+        misconceptionMsg = `<strong>Decimal Rounding Error:</strong> Check your rounding to the nearest ${p.roundPlaces === 2 ? 'hundredth (2 places)' : 'thousandth (3 places)'}. Expected: <strong>${p.roundedDecStr}</strong>.`;
+      } else if (!pctOk) {
+        misconceptionMsg = `<strong>Percentage Conversion Error:</strong> Multiply your decimal (${p.roundedDecStr}) by 100% to find the percentage: <strong>${p.roundedPercentStr}</strong>.`;
+      }
+    }
+
+    stepExplanation = `
+      <ol>
+        <li><strong>Find Total Sample Size (N):</strong><br>
+          Sum of all categories: <code>${p.scenario.categories.map(c => c.count).join(' + ')} = ${p.totalN}</code>.
+        </li>
+        <li><strong>Form Relative Frequency Ratio:</strong><br>
+          <code>Count of "${p.targetCategory.label}" / Total = ${p.targetCount} / ${p.totalN}</code>.
+          ${p.simpDen !== p.totalN ? `Simplified fraction: <code>${p.simpNum} / ${p.simpDen}</code>.` : ''}
+        </li>
+        <li><strong>Compute Decimal (Round to ${p.roundPlaces === 2 ? 'Hundredths' : 'Thousandths'}):</strong><br>
+          <code>${p.targetCount} ÷ ${p.totalN} = ${(p.targetCount / p.totalN).toFixed(5)}...</code><br>
+          Rounded value: <strong>${p.roundedDecStr}</strong>.
+        </li>
+        <li><strong>Convert to Percent:</strong><br>
+          <code>${p.roundedDecStr} × 100% = <strong>${p.roundedPercentStr}</strong></code>.
+        </li>
+      </ol>
+    `;
+  }
+
+  // Update State & UI
+  appState.answeredCurrent = true;
+  appState.totalAnswered++;
+  appState.skills[p.skillId].attempted++;
+
+  if (isCorrect) {
+    appState.totalCorrect++;
+    appState.streak++;
+    if (appState.streak > appState.bestStreak) appState.bestStreak = appState.streak;
+    appState.skills[p.skillId].correct++;
+  } else {
+    appState.streak = 0;
+  }
+
+  // Record answer for set mode if in set mode
+  if (appState.mode === 'set') {
+    appState.setAnswers.push({
+      skillId: p.skillId,
+      skillName: p.skillName,
+      correct: isCorrect,
+      explanation: stepExplanation
+    });
+    updateSetDots();
+  }
+
+  // Display Feedback
+  displayFeedback(isCorrect, misconceptionMsg, stepExplanation);
+  updateGlobalStatsUI();
+  persistCurrentState();
+
+  // Swap action buttons
+  const submitBtn = document.getElementById('btn-submit-answer');
+  const nextBtn = document.getElementById('btn-next-question');
+  if (submitBtn) submitBtn.style.display = 'none';
+  if (nextBtn) {
+    nextBtn.style.display = 'inline-flex';
+    nextBtn.focus();
+  }
+}
+
+function displayFeedback(isCorrect, misconceptionMsg, stepExplanation) {
+  const panel = document.getElementById('feedback-panel');
+  const headline = document.getElementById('feedback-headline');
+  const msg = document.getElementById('feedback-message');
+  const misPanel = document.getElementById('misconception-panel');
+  const misText = document.getElementById('misconception-text');
+  const stepsContainer = document.getElementById('step-by-step-content');
+
+  if (!panel || !headline || !msg || !stepsContainer) return;
+
+  panel.style.display = 'block';
+  panel.className = 'feedback-box ' + (isCorrect ? 'feedback-correct' : 'feedback-incorrect');
+
+  if (isCorrect) {
+    headline.innerHTML = `
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <path d="M20 6 9 17l-5-5"></path>
+      </svg>
+      Correct! Excellent Mathematical Reasoning
+    `;
+    msg.textContent = 'Your answer matches the rigorous place-value standard for MATH 017.';
+  } else {
+    headline.innerHTML = `
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="15" y1="9" x2="9" y2="15"></line>
+        <line x1="9" y1="9" x2="15" y2="15"></line>
+      </svg>
+      Incorrect — Review the Place Value Analysis Below
+    `;
+    msg.textContent = 'Carefully review the common misconception analysis and step-by-step breakdown:';
+  }
+
+  if (misconceptionMsg && misPanel && misText) {
+    misPanel.style.display = 'block';
+    misText.innerHTML = misconceptionMsg;
+  } else if (misPanel) {
+    misPanel.style.display = 'none';
+  }
+
+  stepsContainer.innerHTML = stepExplanation;
+}
+
+// ==========================================
+// NAVIGATION & MODE HANDLING
+// ==========================================
+
+function setPracticeMode(mode) {
+  appState.mode = mode;
+  selectedSkill1Symbol = null;
+
+  const btnDrill = document.getElementById('btn-mode-drill');
+  const btnSet = document.getElementById('btn-mode-set');
+  const drillTabs = document.getElementById('drill-skill-selector');
+  const ribbon = document.getElementById('challenge-status-ribbon');
+  const reportContainer = document.getElementById('set-report-container');
+  const problemCard = document.getElementById('active-problem-card');
+
+  if (btnDrill) btnDrill.classList.toggle('active', mode === 'drill');
+  if (btnSet) btnSet.classList.toggle('active', mode === 'set');
+
+  if (mode === 'drill') {
+    if (drillTabs) drillTabs.style.display = 'flex';
+    if (ribbon) ribbon.style.display = 'none';
+    if (reportContainer) reportContainer.style.display = 'none';
+    if (problemCard) problemCard.style.display = 'block';
+    generateNextQuestion();
+  } else {
+    // Start fresh 5-problem set
+    if (drillTabs) drillTabs.style.display = 'none';
+    if (ribbon) ribbon.style.display = 'flex';
+    if (reportContainer) reportContainer.style.display = 'none';
+    if (problemCard) problemCard.style.display = 'block';
+    startNewSet();
+  }
+}
+
+function selectDrillSkill(skillId) {
+  appState.currentSkill = skillId;
+  selectedSkill1Symbol = null;
+
+  for (let i = 1; i <= 5; i++) {
+    const tab = document.getElementById(`tab-skill-${i}`);
+    if (tab) {
+      tab.classList.toggle('active', i === skillId);
+      tab.setAttribute('aria-selected', i === skillId ? 'true' : 'false');
+    }
+  }
+
+  generateNextQuestion();
+}
+
+function generateNextQuestion() {
+  selectedSkill1Symbol = null;
+
+  if (appState.mode === 'drill') {
+    const skill = appState.currentSkill;
+    if (skill === 1) appState.currentProblem = generateSkill1Problem();
+    else if (skill === 2) appState.currentProblem = generateSkill2Problem();
+    else if (skill === 3) appState.currentProblem = generateSkill3Problem();
+    else if (skill === 4) appState.currentProblem = generateSkill4Problem();
+    else if (skill === 5) appState.currentProblem = generateSkill5Problem();
+    renderCurrentProblem();
+  } else {
+    // Set Mode: advance to next item
+    if (appState.setProblemIndex < 4) {
+      appState.setProblemIndex++;
+      appState.currentProblem = appState.setQuestions[appState.setProblemIndex];
+      updateSetRibbon();
+      renderCurrentProblem();
+    } else {
+      // Completed set! Show report card
+      finishSetAndShowReport();
+    }
+  }
+}
+
+function startNewSet() {
+  appState.setProblemIndex = 0;
+  appState.setAnswers = [];
+  selectedSkill1Symbol = null;
+
+  // Generate 1 problem from each skill 1 to 5
+  appState.setQuestions = [
+    generateSkill1Problem(),
+    generateSkill2Problem(),
+    generateSkill3Problem(),
+    generateSkill4Problem(),
+    generateSkill5Problem()
+  ];
+  appState.currentProblem = appState.setQuestions[0];
+
+  const reportContainer = document.getElementById('set-report-container');
+  const problemCard = document.getElementById('active-problem-card');
+  const ribbon = document.getElementById('challenge-status-ribbon');
+
+  if (reportContainer) reportContainer.style.display = 'none';
+  if (problemCard) problemCard.style.display = 'block';
+  if (ribbon) ribbon.style.display = 'flex';
+
+  resetSetDots();
+  updateSetRibbon();
+  renderCurrentProblem();
+}
+
+function updateSetRibbon() {
+  const stepText = document.getElementById('set-step-text');
+  if (stepText && appState.currentProblem) {
+    stepText.textContent = `Problem ${appState.setProblemIndex + 1} of 5: ${appState.currentProblem.skillName}`;
+  }
+  updateSetDots();
+}
+
+function resetSetDots() {
+  for (let i = 1; i <= 5; i++) {
+    const dot = document.getElementById(`dot-${i}`);
+    if (dot) {
+      dot.className = 'step-dot';
+      if (i === 1) dot.classList.add('active');
+    }
+  }
+}
+
+function updateSetDots() {
+  for (let i = 1; i <= 5; i++) {
+    const dot = document.getElementById(`dot-${i}`);
+    if (!dot) continue;
+    const ans = appState.setAnswers[i - 1];
+    if (ans) {
+      dot.className = 'step-dot ' + (ans.correct ? 'correct' : 'incorrect');
+    } else if (i === appState.setProblemIndex + 1) {
+      dot.className = 'step-dot active';
+    } else {
+      dot.className = 'step-dot';
+    }
+  }
+}
+
+function finishSetAndShowReport() {
+  const problemCard = document.getElementById('active-problem-card');
+  const reportContainer = document.getElementById('set-report-container');
+  const ribbon = document.getElementById('challenge-status-ribbon');
+
+  if (problemCard) problemCard.style.display = 'none';
+  if (ribbon) ribbon.style.display = 'none';
+  if (reportContainer) reportContainer.style.display = 'block';
+
+  // Compute set score
+  const correctCount = appState.setAnswers.filter(a => a.correct).length;
+  const pct = Math.round((correctCount / 5) * 100);
+  const meetsMastery = pct >= 80;
+
+  const badgeBox = document.getElementById('report-badge-container');
+  if (badgeBox) {
+    badgeBox.innerHTML = meetsMastery ? `
+      <div class="report-grade-badge grade-s">
+        ★ Satisfactory (S) Grade Mastery Achieved (${correctCount}/5 • ${pct}%)
+      </div>
+    ` : `
+      <div class="report-grade-badge grade-u">
+        Needs Practice — ${correctCount}/5 (${pct}%) • 80% Required for S Grade
+      </div>
+    `;
+  }
+
+  const tableBody = document.getElementById('report-table-body');
+  if (tableBody) {
+    let rowsHtml = '';
+    const skillTitles = [
+      '1. Decimal Inequalities (<, >, =)',
+      '2. Multi-Step Decimal Rounding',
+      '3. Small % (< 1%) Arithmetic',
+      '4. Decimal to % Conversions',
+      '5. Relative Frequency Tables'
+    ];
+    appState.setAnswers.forEach((ans, idx) => {
+      rowsHtml += `
+        <tr>
+          <td><strong>${skillTitles[idx]}</strong></td>
+          <td>Worksheet #1 Item ${idx + 1}</td>
+          <td>
+            <span style="font-weight: 800; color: ${ans.correct ? 'var(--positive)' : 'var(--error)'};">
+              ${ans.correct ? '✓ Correct' : '✗ Needs Review'}
+            </span>
+          </td>
+          <td>80% Benchmark</td>
+        </tr>
+      `;
+    });
+    tableBody.innerHTML = rowsHtml;
+  }
+
+  const adviceEl = document.getElementById('report-pedagogical-advice');
+  if (adviceEl) {
+    if (meetsMastery) {
+      adviceEl.innerHTML = `<strong>Instructor Note:</strong> Outstanding work! You demonstrated solid mastery across all 5 core skills of Worksheet #1. Your conceptual grounding in place values, rounding precision, and proportional reasoning will directly support your success in MATH 117 confidence intervals and sampling distributions.`;
+    } else {
+      const missedSkills = appState.setAnswers
+        .map((a, i) => (!a.correct ? `Skill ${i + 1}` : null))
+        .filter(Boolean);
+      adviceEl.innerHTML = `<strong>Action Plan:</strong> You scored <strong>${pct}%</strong>, which is below the Montgomery College 80% Satisfactory benchmark. We recommend targeted practice on <strong>${missedSkills.join(', ')}</strong> using Focused Drill Mode before attempting the official module quiz. Drop-in support is also available at the Ackerman STEM Center.`;
+    }
+  }
+}
+
+// ==========================================
+// GLOBAL STATS & ACCORDION
+// ==========================================
+
+function updateGlobalStatsUI() {
+  const streakEl = document.getElementById('stat-streak');
+  const accEl = document.getElementById('stat-accuracy');
+  const solvedEl = document.getElementById('stat-solved');
+
+  if (streakEl) streakEl.textContent = appState.streak;
+  if (solvedEl) solvedEl.textContent = `${appState.totalCorrect}/${appState.totalAnswered}`;
+  if (accEl) {
+    const acc = appState.totalAnswered > 0 ? Math.round((appState.totalCorrect / appState.totalAnswered) * 100) : 0;
+    accEl.textContent = `${acc}%`;
+  }
+
+  // Update individual skill progress bars
+  for (let i = 1; i <= 5; i++) {
+    const sk = appState.skills[i];
+    const pct = sk.attempted > 0 ? Math.round((sk.correct / sk.attempted) * 100) : 0;
+    const barEl = document.getElementById(`skill-${i}-bar`);
+    const txtEl = document.getElementById(`skill-${i}-percent`);
+
+    if (barEl) {
+      barEl.style.width = `${pct}%`;
+      barEl.classList.toggle('achieved', pct >= 80 && sk.attempted >= 3);
+    }
+    if (txtEl) {
+      txtEl.textContent = `${pct}% (${sk.correct}/${sk.attempted})`;
+    }
+  }
+}
+
+function resetAllStats() {
+  if (!confirm('Reset all practice statistics and mastery streaks?')) return;
+  appState.streak = 0;
+  appState.bestStreak = 0;
+  appState.totalAnswered = 0;
+  appState.totalCorrect = 0;
+  for (let i = 1; i <= 5; i++) {
+    appState.skills[i] = { attempted: 0, correct: 0 };
+  }
+  updateGlobalStatsUI();
+  persistCurrentState();
+}
+
+function toggleAccordion(id) {
+  const content = document.getElementById(id);
+  const arrow = document.getElementById(`${id}-arrow`);
+  if (!content) return;
+  const isOpen = content.classList.contains('open');
+  if (isOpen) {
+    content.classList.remove('open');
+    if (arrow) arrow.textContent = '▶';
+  } else {
+    content.classList.add('open');
+    if (arrow) arrow.textContent = '▼';
+  }
+}
+
+// Handle Enter Key submission
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const nextBtn = document.getElementById('btn-next-question');
+    const submitBtn = document.getElementById('btn-submit-answer');
+    if (nextBtn && nextBtn.style.display !== 'none') {
+      generateNextQuestion();
+    } else if (submitBtn && submitBtn.style.display !== 'none') {
+      checkCurrentAnswer();
+    }
+  }
+});
+
+// ==========================================
+// APP INITIALIZATION
+// ==========================================
+async function initApp() {
+  await loadSavedState();
+  updateGlobalStatsUI();
+  setPracticeMode('drill');
+
+  if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === 'function') {
+    window.notebookAppApi.notifyAppReady();
+  }
+}
+
+window.addEventListener('DOMContentLoaded', initApp);
+</script>
+</body>
+</html>
